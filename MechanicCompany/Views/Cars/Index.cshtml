@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MechanicCompany.Models.Car>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Added Cars</h1>
+
+@if (User.Identity.Name != "mikolaj.otreba@o2.pl")
+{
+    <p>
+        <a asp-action="Create">Add Car</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicationUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBrand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductionYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarBrand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarModel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductionYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegistrationNumber)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete </a>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

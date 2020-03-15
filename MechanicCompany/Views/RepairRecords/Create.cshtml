@@ -1,0 +1,71 @@
+﻿@model MechanicCompany.Models.RepairRecord
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add repair</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CarId" class="control-label"></label>
+                <select asp-for="CarId" class="form-control" asp-items="ViewBag.CarId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MechanicId" class="control-label"></label>
+                <select asp-for="MechanicId" class="form-control" asp-items="ViewBag.MechanicId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            @if (User.Identity.Name == "mikolaj.otreba@o2.pl")
+            {
+                <div class="form-group">
+                    <label asp-for="StatusRepair" class="control-label"></label>
+                    <select asp-for="StatusRepair" class="form-control" asp-items="ViewBag.StatusRepair"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndDate" class="control-label"></label>
+                    <input asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RepairCost" class="control-label"></label>
+                    <input asp-for="RepairCost" class="form-control" />
+                </div>
+            }
+            @if (User.Identity.Name != "mikolaj.otreba@o2.pl")
+            {
+                <input asp-for="StatusRepair" class="form-control" hidden="hidden" value="@ViewBag.StatusRepair2" />
+            }
+            <div class="form-group">
+                <label asp-for="VisitDate" class="control-label"></label>
+                <input asp-for="VisitDate" class="form-control" />
+                <span asp-validation-for="VisitDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
