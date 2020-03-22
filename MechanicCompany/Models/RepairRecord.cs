@@ -21,12 +21,12 @@ namespace MechanicCompany.Models
         public DateTime VisitDate { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Start Date of Repair")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "End Date of Repair")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public IEnumerable<RepairPart> RepairPart { get; set; }
         [Display(Name = "Repair Cost")]
-        public double RepairCost { get; set; }
+        public double? RepairCost { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace MechanicCompany.Models
         public string Address { get; set; }
         [PersonalData]
         public string City { get; set; }
-        public DateTime RegistrationDate { get; set; }
         public ICollection<Car> Cars { get; set; }
     }
 }

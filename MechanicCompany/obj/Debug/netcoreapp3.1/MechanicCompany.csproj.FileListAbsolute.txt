@@ -453,3 +453,6 @@ D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Debug\netcoreapp
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Debug\netcoreapp3.1\MechanicCompany.MvcApplicationPartsAssemblyInfo.cache
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Debug\netcoreapp3.1\MechanicCompany.csprojAssemblyReference.cache
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Debug\netcoreapp3.1\Razor\Views\Home\EmailSend.cshtml.g.cs
+D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Debug\netcoreapp3.1\Razor\Views\RepairParts\Create.cshtml.g.cs
+D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Debug\netcoreapp3.1\Razor\Views\RepairParts\Delete.cshtml.g.cs
+D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Debug\netcoreapp3.1\Razor\Views\RepairParts\Index.cshtml.g.cs

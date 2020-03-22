@@ -213,28 +213,5 @@ namespace MechanicCompany.Controllers
             return _context.RepairRecords.Any(e => e.Id == id);
         }
 
-        public IActionResult CreateRepairPart()
-        {
-            ViewData["RepairRecordId"] = new SelectList(_context.RepairRecords, "Id", "Id");
-            return View();
-        }
-
-        // POST: RepairParts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateRepairPart([Bind("Id,RepairRecordId,PartName,PartCompany,PartCost")] RepairPart repairPart)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(repairPart);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["RepairRecordId"] = new SelectList(_context.RepairRecords, "Id", "Id", repairPart.RepairRecordId);
-            return View(repairPart);
-        }
-
     }
 }
