@@ -10,6 +10,7 @@ using MechanicCompany.Models;
 using MechanicCompany.ListsHelper;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace MechanicCompany.Controllers
 {
@@ -17,24 +18,31 @@ namespace MechanicCompany.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IConfiguration _configuration;
 
-        public CarsController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+        public CarsController(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor, IConfiguration configuration)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            _configuration = configuration;
         }
 
         // GET: Cars
-        public async Task<IActionResult> Index()
+        public ViewResult Index(string searchString)
         {
             var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-            var cars = _context.Cars.Include(b => b.ApplicationUser).Where(b => b.ApplicationUserId.Equals(currentUserId)); ;
-            if (currentUserEmail.Equals("mikolaj.otreba@o2.pl"))
+            var cars = _context.Cars.Include(b => b.ApplicationUser).AsEnumerable().Where(b => b.ApplicationUserId.Equals(currentUserId)).ToList();
+            if (currentUserEmail.Equals(_configuration.GetSection("CompanyMail").Value))
             {
-                cars = _context.Cars.Include(b => b.ApplicationUser);
+                cars = _context.Cars.Include(b => b.ApplicationUser).AsEnumerable().ToList();
             }
-            return View(await cars.ToListAsync());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                cars = cars.Where(s => s.FullNameOfCar.Contains(searchString)
+                                       || s.ApplicationUser.FullName.Contains(searchString)).AsEnumerable().ToList();
+            }
+            return View(cars.ToList());
         }
 
         // GET: Cars/Details/5

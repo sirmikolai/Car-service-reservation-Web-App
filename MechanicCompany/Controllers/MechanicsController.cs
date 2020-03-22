@@ -20,9 +20,14 @@ namespace MechanicCompany.Controllers
         }
 
         // GET: Mechanics
-        public async Task<IActionResult> Index()
+        public ViewResult Index(string searchString)
         {
-            return View(await _context.Mechanics.ToListAsync());
+            var mechanics = _context.Mechanics.AsEnumerable().ToList();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                mechanics = mechanics.Where(s => s.FullName.Contains(searchString)).AsEnumerable().ToList();
+            }
+            return View(mechanics.ToList());
         }
 
         // GET: Mechanics/Details/5

@@ -47,9 +47,13 @@ namespace MechanicCompany.Controllers
                 "<p>Mechanic Company</p><p>Siewna 28, 42-201 Częstochowa</p><p>(48) 869 268 456</p><p>mikolaj.otreba@o2.pl</p>" +
                 "</center></div>";
             _emailSender.SendEmailAsync(ToAddress, Subject, Body);
-            return RedirectToAction("Index");
+            return RedirectToAction("EmailSend");
         }
 
+        public IActionResult EmailSend()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

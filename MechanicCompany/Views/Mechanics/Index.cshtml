@@ -1,15 +1,22 @@
 ﻿@model IEnumerable<MechanicCompany.Models.Mechanic>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Employees";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Added Employees</h1>
-
-<p>
-    <a asp-action="Create">Add employee</a>
-</p>
+<h1><i class="fa fa-briefcase"></i> - Added Employees</h1>
+<hr />
+@using (Html.BeginForm())
+{
+    <p>
+        <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add employee</a>
+        <span style="float: right;">
+            @Html.TextBox("searchString", null, new { @class = "form-text-sm" })
+            <button type="submit" class="btn btn-group-sm"><i class="fa fa-search" title="Search"></i></button>
+        </span>
+    </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -39,9 +46,9 @@
                     @Html.DisplayFor(modelItem => item.RoleInCompany)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i> </a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" title="Details"></i> </a>
                 </td>
             </tr>
         }

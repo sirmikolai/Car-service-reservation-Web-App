@@ -31,16 +31,23 @@ namespace MechanicCompany.Controllers
         }
 
         // GET: RepairRecords
-        public async Task<IActionResult> Index()
+        public ViewResult Index(string searchString)
         {
             var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-            var repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).Where(s => s.Car.ApplicationUserId.Equals(currentUserId));
-            if (currentUserEmail.Equals("mikolaj.otreba@o2.pl"))
+            var repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).AsEnumerable().Where(s => s.Car.ApplicationUserId.Equals(currentUserId)).ToList();
+            if (currentUserEmail.Equals(_configuration.GetSection("CompanyMail").Value))
             {
-                repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic);
+                repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).AsEnumerable().ToList();
             }
-            return View(await repairRecords.ToListAsync());
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                repairRecords = repairRecords.Where(s => s.Car.FullNameOfCar.Contains(searchString)
+                                       || s.Mechanic.FullName.Contains(searchString)
+                                       || s.Description.Contains(searchString)
+                                       || s.StatusRepair.Contains(searchString)).AsEnumerable().ToList();
+            }
+            return View(repairRecords.ToList());
         }
 
         // GET: RepairRecords/Details/5

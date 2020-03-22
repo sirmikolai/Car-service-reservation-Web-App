@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Praca\\MechanicCompany\\MechanicCompany\\MechanicCompany.csproj": {}
+    "D:\\Praca\\MechanicCompany\\MechanicCompanyApp\\MechanicCompany\\MechanicCompany.csproj": {}
   },
   "projects": {
-    "D:\\Praca\\MechanicCompany\\MechanicCompany\\MechanicCompany.csproj": {
+    "D:\\Praca\\MechanicCompany\\MechanicCompanyApp\\MechanicCompany\\MechanicCompany.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Praca\\MechanicCompany\\MechanicCompany\\MechanicCompany.csproj",
+        "projectUniqueName": "D:\\Praca\\MechanicCompany\\MechanicCompanyApp\\MechanicCompany\\MechanicCompany.csproj",
         "projectName": "MechanicCompany",
-        "projectPath": "D:\\Praca\\MechanicCompany\\MechanicCompany\\MechanicCompany.csproj",
+        "projectPath": "D:\\Praca\\MechanicCompany\\MechanicCompanyApp\\MechanicCompany\\MechanicCompany.csproj",
         "packagesPath": "C:\\Users\\Mikołaj\\.nuget\\packages\\",
-        "outputPath": "D:\\Praca\\MechanicCompany\\MechanicCompany\\obj\\",
+        "outputPath": "D:\\Praca\\MechanicCompany\\MechanicCompanyApp\\MechanicCompany\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -41,10 +41,6 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "FontAwesome": {
-              "target": "Package",
-              "version": "[4.7.0, )"
-            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.1, )"

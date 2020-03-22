@@ -1,6 +1,7 @@
 ﻿@page
 @model GenerateRecoveryCodesModel
 @{
+    Layout = "_Layout.cshtml";
     ViewData["Title"] = "Generate two-factor authentication (2FA) recovery codes";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
 }
@@ -22,6 +23,6 @@
 </div>
 <div>
     <form method="post" class="form-group">
-        <button class="btn btn-danger" type="submit">Generate Recovery Codes</button>
+        <button class="btn btn-danger" type="submit"><i class="fa fa-check-circle"></i> Generate Recovery Codes</button>
     </form>
 </div>

@@ -1,16 +1,23 @@
 ﻿@model IEnumerable<MechanicCompany.Models.RepairRecord>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Repairs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Added Repairs</h1>
-
-@if (User.Identity.Name != "mikolaj.otreba@o2.pl")
+<h1><i class="fa fa-tools"></i> - Added Repairs</h1>
+<hr />
+@using (Html.BeginForm())
 {
     <p>
-        <a asp-action="Create">Add new repair</a>
+        @if (User.Identity.Name != "mikolaj.otreba@o2.pl")
+        {
+            <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle" title="Add"></i> Add new repair</a>
+        }
+        <span style="float: right; padding-bottom: 16px;">
+            @Html.TextBox("searchString", null, new { @class = "form-text-sm" })
+            <button type="submit" class="btn btn-group-sm"><i class="fa fa-search" title="Search"></i></button>
+        </span>
     </p>
 }
 <table class="table">
@@ -36,9 +43,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepairCost)
             </th>
             <th></th>
         </tr>
@@ -69,15 +73,12 @@
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.RepairCost)
-                </td>
-                <td>
                     @if (User.Identity.Name == "mikolaj.otreba@o2.pl")
                     {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit </a>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete </a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i> </a>
                     }
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" title="Details"></i> </a>
                 </td>
             </tr>
         }

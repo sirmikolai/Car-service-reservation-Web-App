@@ -149,7 +149,7 @@ namespace MechanicCompany.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("MechanicCompany"),
+                _urlEncoder.Encode("Mechanic Company"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

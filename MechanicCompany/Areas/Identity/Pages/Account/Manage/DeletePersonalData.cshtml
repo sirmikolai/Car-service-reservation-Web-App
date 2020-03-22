@@ -1,12 +1,13 @@
 ﻿@page
 @model DeletePersonalDataModel
 @{
+    Layout = "_Layout.cshtml";
     ViewData["Title"] = "Delete Personal Data";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 
 <h4>@ViewData["Title"]</h4>
-
+<hr />
 <div class="alert alert-warning" role="alert">
     <p>
         <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
@@ -24,7 +25,7 @@
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
         }
-        <button class="btn btn-danger" type="submit">Delete data and close my account</button>
+        <button class="btn btn-danger" type="submit"><i class="fa fa-minus-circle"></i> Delete data and close my account</button>
     </form>
 </div>
 

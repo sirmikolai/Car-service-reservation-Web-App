@@ -1,43 +1,44 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
-<h1>@ViewData["Title"]</h1>
-<br />
+<h1><i class="fa fa-phone"></i> - @ViewData["Title"]</h1>
+<hr />
 <div class="row">
     <div class="col-md-4">
+        <img src="~/logo.png" alt="Mechanic Company" width="300" height="99" />
+        <hr />
         <ul class="navbar-nav flex-grow-1">
-            <li class="nav-item"><img src="~/logo.png" alt="Mechanic Company" width="300" height="99" /><li></li></li>
-            <li class="nav-item"><i class="fa fa-road"></i> Siewna 28, 42-201 Częstochowa</li>
-            <li class="nav-item"><i class="fa fa-phone"></i> (48) 869 268 456</li>
-            <li class="nav-item"><i class="fa fa-envelope"></i> smtpserverforapp@gmail.com</li>
+            <li class="nav-item"><i class="fa fa-road" style="color: Highlight;"></i> - Siewna 28, 42-201 Częstochowa</li>
+            <li class="nav-item"><i class="fa fa-phone" style="color: Highlight;"></i> - (48) 869 268 456</li>
+            <li class="nav-item"><i class="fa fa-envelope" style="color: Highlight;"></i> - smtpserverforapp@gmail.com</li>
         </ul>
-        <br />
+        <hr />
         <label class="control-label"><strong>Send Email to us</strong></label>
-        <br />
         <br />
         <form action="/Home/SendEmail" method="post">
             <div class="form-group">
                 <label class="control-label">Your email</label>
-                <input name="YourAddress" class="form-control" style="width:100%;"/>
+                <input name="YourAddress" class="form-control" style="width:100%;" />
             </div>
             <div class="form-group">
                 <label class="control-label">Subject</label>
-                <input name="Subject" class="form-control" style="width:100%;"/>
+                <input name="Subject" class="form-control" style="width:100%;" />
             </div>
             <div class="form-group">
                 <label class="control-label">Message</label>
                 <textarea class="form-control" name="Body" style="width:100%;height:150px;overflow:hidden;"></textarea>
             </div>
             <div class="form-group">
-                <input type="submit" value="Send" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary"><i class="fa fa-chevron-circle-right"></i> Send</button>
             </div>
         </form>
     </div>
     <div class="col-md-2"></div>
     <div class="col-md-4">
+        <h2><i class="fa fa-location-arrow"></i> - Our localization</h2>
         <div class="mapouter">
             <div class="gmap_canvas">
-                <iframe width="480" height="600" id="gmap_canvas" src="https://maps.google.com/maps?q=Politechnika%20Cz%C4%99stochowska&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.divi-discounts.com">divi discount</a>
+                <iframe width="460" height="600" id="gmap_canvas" src="https://maps.google.com/maps?q=Politechnika%20Cz%C4%99stochowska&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
             </div>
         </div>
     </div>
