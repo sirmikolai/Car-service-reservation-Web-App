@@ -25,7 +25,7 @@ namespace MechanicCompany.Models
         [DataType(DataType.Date)]
         [Display(Name = "End Date of Repair")]
         public DateTime? EndDate { get; set; }
-        public IEnumerable<RepairPart> RepairPart { get; set; }
+        public IList<RepairPart> RepairPart { get; set; }
         [Display(Name = "Repair Cost")]
         public double? RepairCost { get; set; }
     }

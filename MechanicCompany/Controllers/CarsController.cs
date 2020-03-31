@@ -33,7 +33,9 @@ namespace MechanicCompany.Controllers
             var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var cars = _context.Cars.Include(b => b.ApplicationUser).AsEnumerable().Where(b => b.ApplicationUserId.Equals(currentUserId)).ToList();
-            if (currentUserEmail.Equals(_configuration.GetSection("CompanyMail").Value))
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
+            if (currentUserEmail.Equals(companyMail))
             {
                 cars = _context.Cars.Include(b => b.ApplicationUser).AsEnumerable().ToList();
             }
@@ -48,6 +50,8 @@ namespace MechanicCompany.Controllers
         // GET: Cars/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             if (id == null)
             {
                 return NotFound();
@@ -67,6 +71,8 @@ namespace MechanicCompany.Controllers
         // GET: Cars/Create
         public IActionResult Create()
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             ViewBag.CurrentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             ViewData["EngineTypeOfFuel"] = CarListHelper.getEngineTypeOfFuel();
             ViewData["CarTypeOfBody"] = CarListHelper.getCarTypeOfBody();
@@ -80,6 +86,8 @@ namespace MechanicCompany.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ApplicationUserId,CarBrand,CarModel,ProductionYear,EngineVolume,EngineName,EnginePower,EngineTypeOfFuel,CarTypeOfBody,RegistrationNumber")] Car car)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             if (ModelState.IsValid)
             {
                 _context.Add(car);
@@ -93,6 +101,8 @@ namespace MechanicCompany.Controllers
         // GET: Cars/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             if (id == null)
             {
                 return NotFound();
@@ -116,6 +126,8 @@ namespace MechanicCompany.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ApplicationUserId,CarBrand,CarModel,ProductionYear,EngineVolume,EngineName,EnginePower,EngineTypeOfFuel,CarTypeOfBody,RegistrationNumber")] Car car)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             if (id != car.Id)
             {
                 return NotFound();
@@ -148,6 +160,8 @@ namespace MechanicCompany.Controllers
         // GET: Cars/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             if (id == null)
             {
                 return NotFound();
@@ -169,6 +183,8 @@ namespace MechanicCompany.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             var car = await _context.Cars.FindAsync(id);
             _context.Cars.Remove(car);
             await _context.SaveChangesAsync();

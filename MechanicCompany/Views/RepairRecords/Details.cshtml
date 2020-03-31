@@ -3,62 +3,71 @@
 @{
     ViewData["Title"] = "Details about repair";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var companyMail = ViewBag.CompanyMail;
 }
 
 <h1>Details about repair</h1>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Car)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Car.FullNameOfCar)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Mechanic)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Mechanic.FullName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StatusRepair)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StatusRepair)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.VisitDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.VisitDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RepairCost)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RepairCost)
-        </dd>
-    </dl>
+<div class="row">
+    <div class="col-md-4">
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Car)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Car.FullNameOfCar)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Mechanic)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Mechanic.FullName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StatusRepair)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StatusRepair)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VisitDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VisitDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.RepairCost)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RepairCost)
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-6">
+        <iframe id="partFrame" src='@Url.Action("Create", "RepairParts")' width="100%"
+                height="100%" frameBorder="0" style="overflow: hidden;"></iframe>
+    </div>
 </div>
 <div>
     <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to repairs</a>

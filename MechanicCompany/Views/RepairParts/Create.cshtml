@@ -1,48 +1,59 @@
 ﻿@model MechanicCompany.Models.RepairPart
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<h1>Create</h1>
+<!DOCTYPE html>
 
-<h4>RepairPart</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="RepairRecordId" class="control-label"></label>
-                <select asp-for="RepairRecordId" class ="form-control" asp-items="ViewBag.RepairRecordId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="PartName" class="control-label"></label>
-                <input asp-for="PartName" class="form-control" />
-                <span asp-validation-for="PartName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PartCompany" class="control-label"></label>
-                <input asp-for="PartCompany" class="form-control" />
-                <span asp-validation-for="PartCompany" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PartCost" class="control-label"></label>
-                <input asp-for="PartCost" class="form-control" />
-                <span asp-validation-for="PartCost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome-free-5.12.1-web/css/all.css">
+</head>
+<body style="padding-left: 5px; padding-right: 5px; overflow-y: auto;">
+
+    <h4>Add part to repair</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="RepairRecordId" class="form-control" value="@ViewBag.RepairRecordId" />
+                <div class="form-group">
+                    <label asp-for="PartName" class="control-label"></label>
+                    <input asp-for="PartName" class="form-control" />
+                    <span asp-validation-for="PartName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PartCompany" class="control-label"></label>
+                    <input asp-for="PartCompany" class="form-control" />
+                    <span asp-validation-for="PartCompany" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PartCost" class="control-label"></label>
+                    <input asp-for="PartCost" class="form-control" />
+                    <span asp-validation-for="PartCost" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add part</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to parts</a>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

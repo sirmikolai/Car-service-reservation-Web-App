@@ -36,7 +36,9 @@ namespace MechanicCompany.Controllers
             var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
             var repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).AsEnumerable().Where(s => s.Car.ApplicationUserId.Equals(currentUserId)).ToList();
-            if (currentUserEmail.Equals(_configuration.GetSection("CompanyMail").Value))
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
+            if (currentUserEmail.Equals(companyMail))
             {
                 repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).AsEnumerable().ToList();
             }
@@ -114,6 +116,7 @@ namespace MechanicCompany.Controllers
         // GET: RepairRecords/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            TempData["repairId"] = id.ToString();
             if (id == null)
             {
                 return NotFound();

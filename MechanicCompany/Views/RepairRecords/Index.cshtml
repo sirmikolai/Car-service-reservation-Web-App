@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Repairs";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var companyMail = ViewBag.CompanyMail;
 }
 
 <h1><i class="fa fa-tools"></i> - Added Repairs</h1>
@@ -10,7 +11,7 @@
 @using (Html.BeginForm())
 {
     <p>
-        @if (User.Identity.Name != "mikolaj.otreba@o2.pl")
+        @if (User.Identity.Name != companyMail)
         {
             <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle" title="Add"></i> Add new repair</a>
         }
@@ -44,43 +45,49 @@
             <th>
                 @Html.DisplayNameFor(model => model.EndDate)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RepairCost)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Car.FullNameOfCar)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Mechanic.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StatusRepair)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.VisitDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndDate)
-                </td>
-                <td>
-                    @if (User.Identity.Name == "mikolaj.otreba@o2.pl")
-                    {
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i> </a>
-                    }
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" title="Details"></i> </a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.FullNameOfCar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mechanic.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusRepair)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RepairCost)
+            </td>
+            <td>
+                @if (User.Identity.Name == companyMail)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i> </a>
+                }
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" title="Details"></i> </a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

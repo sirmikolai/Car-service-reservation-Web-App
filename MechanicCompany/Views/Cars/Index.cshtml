@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Cars";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var companyMail = ViewBag.CompanyMail;
 }
 
 <h1><i class="fa fa-car"></i> - Added Cars</h1>
@@ -10,7 +11,7 @@
 @using (Html.BeginForm())
 {
     <p>
-        @if (User.Identity.Name != "mikolaj.otreba@o2.pl")
+        @if (User.Identity.Name != companyMail)
         {
             <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add Car</a>
         }

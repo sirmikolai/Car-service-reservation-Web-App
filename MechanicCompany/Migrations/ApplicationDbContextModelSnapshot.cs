@@ -374,7 +374,8 @@ namespace MechanicCompany.Migrations
                 {
                     b.HasOne("MechanicCompany.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Cars")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MechanicCompany.Models.RepairPart", b =>

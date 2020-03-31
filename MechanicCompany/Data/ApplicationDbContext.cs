@@ -41,22 +41,26 @@ namespace MechanicCompany.Data
             builder.Entity<ApplicationUser>()
                 .HasMany(c => c.Cars)
                 .WithOne(e => e.ApplicationUser)
-                .HasForeignKey(f => f.ApplicationUserId);
+                .HasForeignKey(f => f.ApplicationUserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Car>()
                 .HasMany(c => c.RepairRecords)
                 .WithOne(e => e.Car)
-                .HasForeignKey(f => f.CarId);
+                .HasForeignKey(f => f.CarId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Mechanic>()
                 .HasMany(c => c.RepairRecords)
                 .WithOne(e => e.Mechanic)
-                .HasForeignKey(f => f.MechanicId);
+                .HasForeignKey(f => f.MechanicId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<RepairRecord>()
                 .HasMany(c => c.RepairPart)
                 .WithOne(e => e.RepairRecord)
-                .HasForeignKey(f => f.RepairRecordId);
+                .HasForeignKey(f => f.RepairRecordId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

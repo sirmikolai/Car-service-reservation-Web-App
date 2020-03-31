@@ -16,6 +16,8 @@ namespace MechanicCompany.Models
         [PersonalData]
         public string Address { get; set; }
         [PersonalData]
+        public string ZipCode { get; set; }
+        [PersonalData]
         public string City { get; set; }
         public ICollection<Car> Cars { get; set; }
     }

@@ -52,6 +52,11 @@ namespace MechanicCompany.Areas.Identity.Pages.Account.Manage
 
             [Required]
             [DataType(DataType.Text)]
+            [Display(Name = "Zip code")]
+            public string ZipCode { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
             [Display(Name = "City")]
             public string City { get; set; }
         }
@@ -68,6 +73,7 @@ namespace MechanicCompany.Areas.Identity.Pages.Account.Manage
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Adress = user.Address,
+                ZipCode = user.ZipCode,
                 City = user.City,
                 PhoneNumber = phoneNumber
             };
@@ -123,6 +129,11 @@ namespace MechanicCompany.Areas.Identity.Pages.Account.Manage
             if (Input.Adress != user.Address)
             {
                 user.Address = Input.Adress;
+            }
+
+            if (Input.ZipCode != user.ZipCode)
+            {
+                user.ZipCode = Input.ZipCode;
             }
 
             if (Input.City != user.City)

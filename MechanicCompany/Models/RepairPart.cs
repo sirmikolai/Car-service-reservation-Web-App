@@ -13,5 +13,7 @@ namespace MechanicCompany.Models
         public string PartCompany { get; set; }
         [Display(Name = "Part Cost")]
         public double PartCost { get; set; }
+        [Display(Name = "Part Quantity")]
+        public double PartQuantity { get; set; }
     }
 }

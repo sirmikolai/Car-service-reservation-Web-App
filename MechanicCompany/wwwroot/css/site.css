@@ -63,7 +63,9 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
-    font-family: "Times New Roman", Times, serif;
+    font-family: Seagoe UI, sans-serif;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 .footer {
   position: absolute;
@@ -76,11 +78,11 @@ body {
     position: relative;
     text-align: right;
     height: 600px;
-    width: 480px;
+    width: 550px;
 }
 .gmap_canvas {
     overflow: hidden;
     background: none !important;
     height: 600px;
-    width: 480px;
+    width: 550px;
 }

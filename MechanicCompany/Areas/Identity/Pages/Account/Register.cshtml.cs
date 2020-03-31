@@ -79,6 +79,11 @@ namespace MechanicCompany.Areas.Identity.Pages.Account
 
             [Required]
             [DataType(DataType.Text)]
+            [Display(Name = "Zip code")]
+            public string ZipCode { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
             [Display(Name = "City")]
             public string City { get; set; }
 
@@ -107,6 +112,7 @@ namespace MechanicCompany.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     Address = Input.Adress,
+                    ZipCode = Input.ZipCode,
                     City = Input.City,
                     PhoneNumber = Input.PhoneNumber
                 };
