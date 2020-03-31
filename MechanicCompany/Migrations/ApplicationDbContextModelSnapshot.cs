@@ -100,6 +100,9 @@ namespace MechanicCompany.Migrations
                     b.Property<string>("PartName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<double>("PartQuantity")
+                        .HasColumnType("float");
+
                     b.Property<int>("RepairRecordId")
                         .HasColumnType("int");
 
@@ -365,6 +368,9 @@ namespace MechanicCompany.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue(1);

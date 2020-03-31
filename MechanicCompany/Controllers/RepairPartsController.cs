@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MechanicCompany.Data;
 using MechanicCompany.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 
 namespace MechanicCompany.Controllers
@@ -24,7 +20,6 @@ namespace MechanicCompany.Controllers
         }
 
         // GET: RepairParts
-        [HttpGet]
         public async Task<IActionResult> Index()
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -53,7 +48,7 @@ namespace MechanicCompany.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( [Bind("Id,RepairRecordId,PartName,PartCompany,PartCost")] RepairPart repairPart)
+        public async Task<IActionResult> Create([Bind("Id,RepairRecordId,PartName,PartCompany,PartCost,PartQuantity")] RepairPart repairPart)
         {
             string id = "0";
             if (TempData["repairId"] != null)

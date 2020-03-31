@@ -44,8 +44,8 @@ namespace MechanicCompany.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    RegistrationDate = table.Column<DateTime>(nullable: true)
+                    ZipCode = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -198,7 +198,7 @@ namespace MechanicCompany.Migrations
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,9 +212,9 @@ namespace MechanicCompany.Migrations
                     Description = table.Column<string>(nullable: true),
                     StatusRepair = table.Column<string>(nullable: true),
                     VisitDate = table.Column<DateTime>(nullable: false),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false),
-                    RepairCost = table.Column<double>(nullable: false)
+                    StartDate = table.Column<DateTime>(nullable: true),
+                    EndDate = table.Column<DateTime>(nullable: true),
+                    RepairCost = table.Column<double>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -242,7 +242,8 @@ namespace MechanicCompany.Migrations
                     RepairRecordId = table.Column<int>(nullable: false),
                     PartName = table.Column<string>(nullable: true),
                     PartCompany = table.Column<string>(nullable: true),
-                    PartCost = table.Column<double>(nullable: false)
+                    PartCost = table.Column<double>(nullable: false),
+                    PartQuantity = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

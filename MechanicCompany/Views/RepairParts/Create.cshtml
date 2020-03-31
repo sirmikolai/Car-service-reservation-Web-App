@@ -22,7 +22,7 @@
         <div class="col-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="RepairRecordId" class="form-control" value="@ViewBag.RepairRecordId" />
+                <input type="hidden" asp-for="RepairRecordId" class="form-control" value="@ViewBag.RepairRecordId" />
                 <div class="form-group">
                     <label asp-for="PartName" class="control-label"></label>
                     <input asp-for="PartName" class="form-control" />
@@ -37,6 +37,11 @@
                     <label asp-for="PartCost" class="control-label"></label>
                     <input asp-for="PartCost" class="form-control" />
                     <span asp-validation-for="PartCost" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PartQuantity" class="control-label"></label>
+                    <input asp-for="PartQuantity" class="form-control" />
+                    <span asp-validation-for="PartQuantity" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add part</button>

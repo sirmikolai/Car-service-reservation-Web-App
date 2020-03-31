@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MechanicCompany.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200322202809_Initial3")]
-    partial class Initial3
+    [Migration("20200331180943_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,6 +101,9 @@ namespace MechanicCompany.Migrations
 
                     b.Property<string>("PartName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PartQuantity")
+                        .HasColumnType("float");
 
                     b.Property<int>("RepairRecordId")
                         .HasColumnType("int");
@@ -367,6 +370,9 @@ namespace MechanicCompany.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue(1);
