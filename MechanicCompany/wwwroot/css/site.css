@@ -86,3 +86,6 @@ body {
     height: 600px;
     width: 550px;
 }
+table.repairDetails td > div {
+    height: 200%;
+}

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MechanicCompany.Models
 {
@@ -26,7 +24,8 @@ namespace MechanicCompany.Models
         [Display(Name = "End Date of Repair")]
         public DateTime? EndDate { get; set; }
         public IList<RepairPart> RepairPart { get; set; }
-        [Display(Name = "Repair Cost")]
-        public double? RepairCost { get; set; }
+        [Display(Name = "Labor Cost")]
+        public double LaborCost { get; set; }
     }
+
 }

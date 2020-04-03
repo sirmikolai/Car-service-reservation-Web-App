@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using MechanicCompany.Data;
+using MechanicCompany.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MechanicCompany.Data;
-using MechanicCompany.Models;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MechanicCompany.Controllers
 {
@@ -19,7 +19,6 @@ namespace MechanicCompany.Controllers
             _configuration = configuration;
         }
 
-        // GET: RepairParts
         public async Task<IActionResult> Index()
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -28,13 +27,22 @@ namespace MechanicCompany.Controllers
             if (TempData["repairId"] != null)
                 id = TempData["repairId"] as string;
             TempData.Keep();
-            var applicationDbContext = _context.RepairParts.Include(r => r.RepairRecord).Where(w => w.RepairRecordId.Equals(int.Parse(id)));
+            var repairRecordRepairStatus = _context.RepairRecords
+                .Include(r => r.Car)
+                .Include(r => r.Mechanic)
+                .Where(c => c.Id == int.Parse(id))
+                .Select(c => c.StatusRepair)
+                .FirstOrDefault().ToString();
+
+            ViewData["StatusOfRepair"] = repairRecordRepairStatus;
+            var applicationDbContext = _context.RepairParts.Include(r => r.RepairRecord).Where(w => w.RepairRecordId == int.Parse(id));
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: RepairParts/Create
         public IActionResult Create()
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             string id = "0";
             if (TempData["repairId"] != null)
                 id = TempData["repairId"] as string;
@@ -43,13 +51,12 @@ namespace MechanicCompany.Controllers
             return View();
         }
 
-        // POST: RepairParts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,RepairRecordId,PartName,PartCompany,PartCost,PartQuantity")] RepairPart repairPart)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             string id = "0";
             if (TempData["repairId"] != null)
                 id = TempData["repairId"] as string;
@@ -64,9 +71,10 @@ namespace MechanicCompany.Controllers
             return View(repairPart);
         }
 
-        // GET: RepairParts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             if (id == null)
             {
                 return NotFound();
@@ -83,11 +91,12 @@ namespace MechanicCompany.Controllers
             return View(repairPart);
         }
 
-        // POST: RepairParts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             var repairPart = await _context.RepairParts.FindAsync(id);
             _context.RepairParts.Remove(repairPart);
             await _context.SaveChangesAsync();

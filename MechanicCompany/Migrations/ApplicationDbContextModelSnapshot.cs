@@ -129,11 +129,11 @@ namespace MechanicCompany.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<double>("LaborCost")
+                        .HasColumnType("float");
+
                     b.Property<int>("MechanicId")
                         .HasColumnType("int");
-
-                    b.Property<double?>("RepairCost")
-                        .HasColumnType("float");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");

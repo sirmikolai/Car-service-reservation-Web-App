@@ -45,9 +45,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.EndDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RepairCost)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -76,10 +73,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EndDate)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RepairCost)
-            </td>
-            <td>
+            <td style="margin:10px;">
                 @if (User.Identity.Name == companyMail)
                 {
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>

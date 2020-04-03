@@ -1,5 +1,3 @@
-using System;
-
 namespace MechanicCompany.Models
 {
     public class ErrorViewModel

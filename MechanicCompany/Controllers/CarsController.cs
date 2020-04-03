@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MechanicCompany.Data;
-using MechanicCompany.Models;
+﻿using MechanicCompany.Data;
 using MechanicCompany.ListsHelper;
-using System.Security.Claims;
+using MechanicCompany.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MechanicCompany.Controllers
 {
@@ -27,7 +25,6 @@ namespace MechanicCompany.Controllers
             _configuration = configuration;
         }
 
-        // GET: Cars
         public ViewResult Index(string searchString)
         {
             var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -47,7 +44,6 @@ namespace MechanicCompany.Controllers
             return View(cars.ToList());
         }
 
-        // GET: Cars/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -68,7 +64,6 @@ namespace MechanicCompany.Controllers
             return View(car);
         }
 
-        // GET: Cars/Create
         public IActionResult Create()
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -79,9 +74,6 @@ namespace MechanicCompany.Controllers
             return View();
         }
 
-        // POST: Cars/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,ApplicationUserId,CarBrand,CarModel,ProductionYear,EngineVolume,EngineName,EnginePower,EngineTypeOfFuel,CarTypeOfBody,RegistrationNumber")] Car car)
@@ -98,7 +90,6 @@ namespace MechanicCompany.Controllers
             return View(car);
         }
 
-        // GET: Cars/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -119,9 +110,6 @@ namespace MechanicCompany.Controllers
             return View(car);
         }
 
-        // POST: Cars/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ApplicationUserId,CarBrand,CarModel,ProductionYear,EngineVolume,EngineName,EnginePower,EngineTypeOfFuel,CarTypeOfBody,RegistrationNumber")] Car car)
@@ -157,7 +145,6 @@ namespace MechanicCompany.Controllers
             return View(car);
         }
 
-        // GET: Cars/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -178,7 +165,6 @@ namespace MechanicCompany.Controllers
             return View(car);
         }
 
-        // POST: Cars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

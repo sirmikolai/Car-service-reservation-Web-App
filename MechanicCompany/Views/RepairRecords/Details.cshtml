@@ -4,71 +4,145 @@
     ViewData["Title"] = "Details about repair";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var companyMail = ViewBag.CompanyMail;
+    var costOfParts = ViewBag.CostOfParts;
+    var allRepairCosts = ViewBag.AllRepairCosts;
 }
 
 <h1>Details about repair</h1>
 
+<hr />
 <div class="row">
+    <div class="col-md-5">
+        <table class="repairDetails" width="100%">
+            <tr>
+                <td>
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.Car)</strong>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.DisplayFor(model => model.Car.FullNameOfCar)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.Mechanic)</strong>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.DisplayFor(model => model.Mechanic.FullName)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.Description)</strong>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.DisplayFor(model => model.Description)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.StatusRepair)</strong>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.DisplayFor(model => model.StatusRepair)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.VisitDate)</strong>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.DisplayFor(model => model.VisitDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.StartDate)</strong>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.DisplayFor(model => model.StartDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.EndDate)</strong>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.DisplayFor(model => model.EndDate)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <strong>@Html.DisplayNameFor(model => model.LaborCost)</strong>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @Html.DisplayFor(model => model.LaborCost) $
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <strong>Cost of Parts</strong>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @costOfParts $
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <strong>All repair costs</strong>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        @allRepairCosts $
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="col-md-1"></div>
     <div class="col-md-6">
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Car)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Car.FullNameOfCar)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Mechanic)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Mechanic.FullName)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.StatusRepair)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.StatusRepair)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.VisitDate)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.VisitDate)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.StartDate)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.StartDate)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.EndDate)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.EndDate)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.RepairCost)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.RepairCost)
-            </dd>
-        </dl>
-    </div>
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-4">
         <iframe id="partFrame" src='@Url.Action("Index", "RepairParts")' width="100%"
                 height="100%" frameBorder="0" style="overflow: hidden;"></iframe>
     </div>
 </div>
+<br />
 <div>
     <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to repairs</a>
 </div>

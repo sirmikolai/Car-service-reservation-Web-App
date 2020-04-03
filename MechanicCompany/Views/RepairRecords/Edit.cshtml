@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit repair";
+    var statusOfRepair = ViewBag.StatusOfRepair;
 }
 
 <h1>Edit repair information</h1>
@@ -14,8 +15,8 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="CarId" class="control-label"></label>
-                <select asp-for="CarId" class="form-control" asp-items="ViewBag.CarId"></select>
-                <span asp-validation-for="MechanicId" class="text-danger"></span>
+                <select asp-for="CarId" class="form-control" readonly="readonly" asp-items="ViewBag.CarId"></select>
+                <span asp-validation-for="CarId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="MechanicId" class="control-label"></label>
@@ -23,34 +24,104 @@
                 <span asp-validation-for="MechanicId" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" readonly="readonly" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="StatusRepair" class="control-label"></label>
                 <select asp-for="StatusRepair" class="form-control" asp-items="ViewBag.StatusRepair"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="VisitDate" class="control-label"></label>
-                <input asp-for="VisitDate" class="form-control" />
-                <span asp-validation-for="VisitDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RepairCost" class="control-label"></label>
-                <input asp-for="RepairCost" class="form-control" />
-                <span asp-validation-for="RepairCost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
+            @if (statusOfRepair == "Pending")
+            {
+                <div class="form-group">
+                    <label asp-for="VisitDate" class="control-label"></label>
+                    <input asp-for="VisitDate" class="form-control" />
+                    <span asp-validation-for="VisitDate" class="text-danger"></span>
+                </div>
+            }
+            @if (statusOfRepair == "Approved")
+            {
+                <div class="form-group">
+                    <label asp-for="VisitDate" class="control-label"></label>
+                    <input asp-for="VisitDate" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="VisitDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input asp-for="StartDate" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+            }
+            @if (statusOfRepair == "Started")
+            {
+                <div class="form-group">
+                    <label asp-for="VisitDate" class="control-label"></label>
+                    <input asp-for="VisitDate" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="VisitDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input asp-for="StartDate" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndDate" class="control-label"></label>
+                    <input asp-for="EndDate" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LaborCost" class="control-label"></label>
+                    <input asp-for="LaborCost" class="form-control" />
+                    <span asp-validation-for="LaborCost" class="text-danger"></span>
+                </div>
+            }
+            @if (statusOfRepair == "Fixed")
+            {
+                <div class="form-group">
+                    <label asp-for="VisitDate" class="control-label"></label>
+                    <input asp-for="VisitDate" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="VisitDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input asp-for="StartDate" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndDate" class="control-label"></label>
+                    <input asp-for="EndDate" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LaborCost" class="control-label"></label>
+                    <input asp-for="LaborCost" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="LaborCost" class="text-danger"></span>
+                </div>
+            }
+            @if (statusOfRepair == "Closed")
+            {
+                <div class="form-group">
+                    <label asp-for="VisitDate" class="control-label"></label>
+                    <input asp-for="VisitDate" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="VisitDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="StartDate" class="control-label"></label>
+                    <input asp-for="StartDate" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="StartDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EndDate" class="control-label"></label>
+                    <input asp-for="EndDate" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="EndDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LaborCost" class="control-label"></label>
+                    <input asp-for="LaborCost" readonly="readonly" class="form-control" />
+                    <span asp-validation-for="LaborCost" class="text-danger"></span>
+                </div>
+            }
             <div class="form-group">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle"></i> Save changes</button>
             </div>

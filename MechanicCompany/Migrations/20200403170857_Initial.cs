@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using System;
 
 namespace MechanicCompany.Migrations
 {
@@ -214,7 +214,7 @@ namespace MechanicCompany.Migrations
                     VisitDate = table.Column<DateTime>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: true),
                     EndDate = table.Column<DateTime>(nullable: true),
-                    RepairCost = table.Column<double>(nullable: true)
+                    LaborCost = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {

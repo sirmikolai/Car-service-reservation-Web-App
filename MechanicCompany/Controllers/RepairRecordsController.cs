@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using MechanicCompany.Data;
+using MechanicCompany.ListsHelper;
+using MechanicCompany.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MechanicCompany.Data;
-using MechanicCompany.Models;
-using MechanicCompany.ListsHelper;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace MechanicCompany.Controllers
 {
@@ -30,14 +29,13 @@ namespace MechanicCompany.Controllers
             _configuration = configuration;
         }
 
-        // GET: RepairRecords
         public ViewResult Index(string searchString)
         {
             var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
-            var repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).AsEnumerable().Where(s => s.Car.ApplicationUserId.Equals(currentUserId)).ToList();
             var companyMail = _configuration.GetSection("CompanyMail").Value;
             ViewBag.CompanyMail = companyMail;
+            var repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).AsEnumerable().Where(s => s.Car.ApplicationUserId.Equals(currentUserId)).ToList();
             if (currentUserEmail.Equals(companyMail))
             {
                 repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).AsEnumerable().ToList();
@@ -52,9 +50,9 @@ namespace MechanicCompany.Controllers
             return View(repairRecords.ToList());
         }
 
-        // GET: RepairRecords/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            TempData["repairId"] = id.ToString();
             if (id == null)
             {
                 return NotFound();
@@ -69,10 +67,23 @@ namespace MechanicCompany.Controllers
                 return NotFound();
             }
 
+            var repairRecordLaborCost = _context.RepairRecords
+                .Include(r => r.Car)
+                .Include(r => r.Mechanic)
+                .Where(c => c.Id == id)
+                .Select(c => c.LaborCost)
+                .FirstOrDefault().ToString();
+
+            var repairPartsCost = _context.RepairParts
+                .Include(r => r.RepairRecord)
+                .Where(m => m.RepairRecordId == id)
+                .Sum(r => r.PartCost * r.PartQuantity);
+
+            ViewData["CostOfParts"] = repairPartsCost.ToString();
+            ViewData["AllRepairCosts"] = Double.Parse(repairPartsCost.ToString()) + Double.Parse(repairRecordLaborCost.ToString());
             return View(repairRecord);
         }
 
-        // GET: RepairRecords/Create
         public IActionResult Create()
         {
             var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -83,12 +94,9 @@ namespace MechanicCompany.Controllers
             return View();
         }
 
-        // POST: RepairRecords/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CarId,MechanicId,Description,StatusRepair,VisitDate,StartDate,EndDate,RepairCost")] RepairRecord repairRecord)
+        public async Task<IActionResult> Create([Bind("Id,CarId,MechanicId,Description,StatusRepair,VisitDate,StartDate,EndDate,LaborCost")] RepairRecord repairRecord)
         {
             if (ModelState.IsValid)
             {
@@ -127,18 +135,23 @@ namespace MechanicCompany.Controllers
             {
                 return NotFound();
             }
+            var repairRecordRepairStatus = _context.RepairRecords
+                .Include(r => r.Car)
+                .Include(r => r.Mechanic)
+                .Where(c => c.Id == id)
+                .Select(c => c.StatusRepair)
+                .FirstOrDefault().ToString();
+
             ViewData["CarId"] = new SelectList(_context.Cars, "Id", "FullNameOfCar");
             ViewData["MechanicId"] = new SelectList(_context.Mechanics, "Id", "FullName");
             ViewData["StatusRepair"] = RepairRecordHelper.getRepairStatus();
+            ViewData["StatusOfRepair"] = repairRecordRepairStatus;
             return View(repairRecord);
         }
 
-        // POST: RepairRecords/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CarId,MechanicId,Description,StatusRepair,VisitDate,StartDate,EndDate,RepairCost")] RepairRecord repairRecord)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CarId,MechanicId,Description,StatusRepair,VisitDate,StartDate,EndDate,LaborCost")] RepairRecord repairRecord)
         {
             if (id != repairRecord.Id)
             {
@@ -180,7 +193,6 @@ namespace MechanicCompany.Controllers
             return View(repairRecord);
         }
 
-        // GET: RepairRecords/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -200,7 +212,6 @@ namespace MechanicCompany.Controllers
             return View(repairRecord);
         }
 
-        // POST: RepairRecords/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

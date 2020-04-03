@@ -3,6 +3,7 @@
 @{
     Layout = null;
     var companyMail = ViewBag.CompanyMail;
+    var statusOfRepair = ViewBag.StatusOfRepair;
 }
 
 <!DOCTYPE html>
@@ -18,9 +19,12 @@
 <body style="padding-left: 5px; padding-right: 5px; overflow-y: auto;">
     @if (User.Identity.Name == companyMail)
     {
-        <p>
-            <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle" title="Add"></i> Add part</a>
-        </p>
+        if (statusOfRepair == "Started")
+        {
+            <p>
+                <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle" title="Add"></i> Add part</a>
+            </p>
+        }
     }
     <table class="table">
         <thead>
@@ -43,26 +47,26 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PartName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PartCompany)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PartCost)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PartQuantity)
-                </td>
-                @if (User.Identity.Name == companyMail)
-                {
+                <tr>
                     <td>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i></a>
+                        @Html.DisplayFor(modelItem => item.PartName)
                     </td>
-                }
-            </tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartCompany)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartCost) $
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PartQuantity)
+                    </td>
+                    @if (User.Identity.Name == companyMail)
+                    {
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i></a>
+                        </td>
+                    }
+                </tr>
             }
         </tbody>
     </table>

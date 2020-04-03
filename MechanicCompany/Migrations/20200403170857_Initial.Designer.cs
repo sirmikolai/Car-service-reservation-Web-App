@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MechanicCompany.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200331180943_Initial")]
+    [Migration("20200403170857_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,11 +131,11 @@ namespace MechanicCompany.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<double>("LaborCost")
+                        .HasColumnType("float");
+
                     b.Property<int>("MechanicId")
                         .HasColumnType("int");
-
-                    b.Property<double?>("RepairCost")
-                        .HasColumnType("float");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");

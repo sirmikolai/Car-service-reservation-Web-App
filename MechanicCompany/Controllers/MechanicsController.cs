@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MechanicCompany.Data;
+using MechanicCompany.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MechanicCompany.Data;
-using MechanicCompany.Models;
-using Microsoft.Extensions.Configuration;
 
 namespace MechanicCompany.Controllers
 {
@@ -22,7 +20,6 @@ namespace MechanicCompany.Controllers
             _configuration = configuration;
         }
 
-        // GET: Mechanics
         public ViewResult Index(string searchString)
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -35,7 +32,6 @@ namespace MechanicCompany.Controllers
             return View(mechanics.ToList());
         }
 
-        // GET: Mechanics/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -55,7 +51,6 @@ namespace MechanicCompany.Controllers
             return View(mechanic);
         }
 
-        // GET: Mechanics/Create
         public IActionResult Create()
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -63,9 +58,6 @@ namespace MechanicCompany.Controllers
             return View();
         }
 
-        // POST: Mechanics/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,RoleInCompany")] Mechanic mechanic)
@@ -81,7 +73,6 @@ namespace MechanicCompany.Controllers
             return View(mechanic);
         }
 
-        // GET: Mechanics/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -99,9 +90,6 @@ namespace MechanicCompany.Controllers
             return View(mechanic);
         }
 
-        // POST: Mechanics/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,RoleInCompany")] Mechanic mechanic)
@@ -136,7 +124,6 @@ namespace MechanicCompany.Controllers
             return View(mechanic);
         }
 
-        // GET: Mechanics/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -156,7 +143,6 @@ namespace MechanicCompany.Controllers
             return View(mechanic);
         }
 
-        // POST: Mechanics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
