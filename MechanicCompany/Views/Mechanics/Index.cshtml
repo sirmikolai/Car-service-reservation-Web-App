@@ -1,57 +1,79 @@
 ﻿@model IEnumerable<MechanicCompany.Models.Mechanic>
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     ViewData["Title"] = "Employees";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var companyMail = ViewBag.CompanyMail;
 }
-
-<h1><i class="fa fa-briefcase"></i> - Added Employees</h1>
-<hr />
-@using (Html.BeginForm())
+@if (SignInManager.IsSignedIn(User))
 {
-    <p>
-        <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add employee</a>
-        <span style="float: right;">
-            @Html.TextBox("searchString", null, new { @class = "form-text-sm" })
-            <button type="submit" class="btn btn-group-sm"><i class="fa fa-search" title="Search"></i></button>
-        </span>
-    </p>
-}
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoleInCompany)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
+    @if (User.Identity.Name == companyMail)
+    {
+        <h1><i class="fa fa-briefcase"></i> - Added Employees</h1>
+        <hr />
+        @using (Html.BeginForm())
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoleInCompany)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i> </a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" title="Details"></i> </a>
-                </td>
-            </tr>
+            <p>
+                <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add employee</a>
+                <span style="float: right;">
+                    @Html.TextBox("searchString", null, new { @class = "form-text-sm" })
+                    <button type="submit" class="btn btn-group-sm"><i class="fa fa-search" title="Search"></i></button>
+                </span>
+            </p>
         }
-    </tbody>
-</table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.RoleInCompany)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoleInCompany)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i> </a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" title="Details"></i> </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+        <br />
+        <div>
+            <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
+        </div>
+    }
+}
+else
+{
+    <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+    <br />
+    <div>
+        <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
+    </div>
+}

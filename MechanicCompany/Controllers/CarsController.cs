@@ -32,14 +32,23 @@ namespace MechanicCompany.Controllers
             var cars = _context.Cars.Include(b => b.ApplicationUser).AsEnumerable().Where(b => b.ApplicationUserId.Equals(currentUserId)).ToList();
             var companyMail = _configuration.GetSection("CompanyMail").Value;
             ViewBag.CompanyMail = companyMail;
-            if (currentUserEmail.Equals(companyMail))
+            try
             {
-                cars = _context.Cars.Include(b => b.ApplicationUser).AsEnumerable().ToList();
+                if (currentUserEmail.Equals(companyMail))
+                {
+                    cars = _context.Cars.Include(b => b.ApplicationUser).AsEnumerable().ToList();
+                }
             }
+            catch (Exception)
+            { }
             if (!String.IsNullOrEmpty(searchString))
             {
                 cars = cars.Where(s => s.FullNameOfCar.Contains(searchString)
-                                       || s.ApplicationUser.FullName.Contains(searchString)).AsEnumerable().ToList();
+                                       || s.FullNameOfCar.ToLower().Contains(searchString)
+                                       || s.FullNameOfCar.ToUpper().Contains(searchString)
+                                       || s.ApplicationUser.FullName.Contains(searchString)
+                                       || s.ApplicationUser.FullName.ToLower().Contains(searchString)
+                                       || s.ApplicationUser.FullName.ToUpper().Contains(searchString)).AsEnumerable().ToList();
             }
             return View(cars.ToList());
         }
@@ -53,9 +62,17 @@ namespace MechanicCompany.Controllers
                 return NotFound();
             }
 
+            var userNameForCar = _context.Cars
+                .Include(c => c.ApplicationUser)
+                .Where(c => c.Id == id)
+                .Select(d => d.ApplicationUser.Email)
+                .FirstOrDefault();
+            ViewData["UserNameForCar"] = userNameForCar;
+
             var car = await _context.Cars
                 .Include(c => c.ApplicationUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (car == null)
             {
                 return NotFound();
@@ -94,6 +111,12 @@ namespace MechanicCompany.Controllers
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
             ViewBag.CompanyMail = companyMail;
+            var userNameForCar = _context.Cars
+                .Include(c => c.ApplicationUser)
+                .Where(c => c.Id == id)
+                .Select(d => d.ApplicationUser.Email)
+                .FirstOrDefault();
+            ViewData["UserNameForCar"] = userNameForCar;
             if (id == null)
             {
                 return NotFound();
@@ -116,6 +139,12 @@ namespace MechanicCompany.Controllers
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
             ViewBag.CompanyMail = companyMail;
+            var userNameForCar = _context.Cars
+                .Include(c => c.ApplicationUser)
+                .Where(c => c.Id == id)
+                .Select(d => d.ApplicationUser.Email)
+                .FirstOrDefault();
+            ViewData["UserNameForCar"] = userNameForCar;
             if (id != car.Id)
             {
                 return NotFound();
@@ -149,6 +178,12 @@ namespace MechanicCompany.Controllers
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
             ViewBag.CompanyMail = companyMail;
+            var userNameForCar = _context.Cars
+                .Include(c => c.ApplicationUser)
+                .Where(c => c.Id == id)
+                .Select(d => d.ApplicationUser.Email)
+                .FirstOrDefault();
+            ViewData["UserNameForCar"] = userNameForCar;
             if (id == null)
             {
                 return NotFound();
@@ -171,6 +206,12 @@ namespace MechanicCompany.Controllers
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
             ViewBag.CompanyMail = companyMail;
+            var userNameForCar = _context.Cars
+                .Include(c => c.ApplicationUser)
+                .Where(c => c.Id == id)
+                .Select(d => d.ApplicationUser.Email)
+                .FirstOrDefault();
+            ViewData["UserNameForCar"] = userNameForCar;
             var car = await _context.Cars.FindAsync(id);
             _context.Cars.Remove(car);
             await _context.SaveChangesAsync();

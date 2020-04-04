@@ -46,8 +46,8 @@ namespace MechanicCompany.Controllers
                 "<img src='https://i.imgur.com/JgvLADt.png' alt='Mechanic Company' height='99' width='300'/><hr>" +
                 "<p></p><p></p><p>" + ClientAdress + " send email to you: </p>" +
                 "<p></p><p></p><p>" + HttpContext.Request.Form["Body"].FirstOrDefault() + "</p><hr>" +
-                "<p>Mechanic Company</p><p>Siewna 28, 42-201 Częstochowa</p><p>(48) 869 268 456</p><p>mikolaj.otreba@o2.pl</p>" +
-                "</center></div>";
+                "<div><strong>Mechanic Company</strong><br>Armii Krajowej 36, 42-202 Częstochowa<br>" +
+                "(48) 869 268 456<br>smtpserverforapp@gmail.com</div></center></div>";
             _emailSender.SendEmailAsync(CompanyMail, Subject, Body);
             return RedirectToAction("EmailSend");
         }

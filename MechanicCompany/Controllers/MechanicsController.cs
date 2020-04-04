@@ -27,7 +27,12 @@ namespace MechanicCompany.Controllers
             var mechanics = _context.Mechanics.AsEnumerable().ToList();
             if (!String.IsNullOrEmpty(searchString))
             {
-                mechanics = mechanics.Where(s => s.FullName.Contains(searchString)).AsEnumerable().ToList();
+                mechanics = mechanics.Where(s => s.FullName.Contains(searchString)
+                                       || s.FullName.ToLower().Contains(searchString)
+                                       || s.FullName.ToUpper().Contains(searchString)
+                                       || s.RoleInCompany.Contains(searchString)
+                                       || s.RoleInCompany.ToLower().Contains(searchString)
+                                       || s.RoleInCompany.ToUpper().Contains(searchString)).AsEnumerable().ToList();
             }
             return View(mechanics.ToList());
         }

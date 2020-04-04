@@ -1,87 +1,98 @@
 ﻿@model IEnumerable<MechanicCompany.Models.RepairRecord>
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     ViewData["Title"] = "Repairs";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var companyMail = ViewBag.CompanyMail;
 }
-
-<h1><i class="fa fa-tools"></i> - Added Repairs</h1>
-<hr />
-@using (Html.BeginForm())
+@if (SignInManager.IsSignedIn(User))
 {
-    <p>
-        @if (User.Identity.Name != companyMail)
-        {
-            <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle" title="Add"></i> Add new repair</a>
-        }
-        <span style="float: right; padding-bottom: 16px;">
-            @Html.TextBox("searchString", null, new { @class = "form-text-sm" })
-            <button type="submit" class="btn btn-group-sm"><i class="fa fa-search" title="Search"></i></button>
-        </span>
-    </p>
+    <h1><i class="fa fa-tools"></i> - Added Repairs</h1>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        <p>
+            @if (User.Identity.Name != companyMail)
+            {
+                <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle" title="Add"></i> Add new repair</a>
+            }
+            <span style="float: right; padding-bottom: 16px;">
+                @Html.TextBox("searchString", null, new { @class = "form-text-sm" })
+                <button type="submit" class="btn btn-group-sm"><i class="fa fa-search" title="Search"></i></button>
+            </span>
+        </p>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Car)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Mechanic)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatusRepair)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VisitDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <strong>@Html.DisplayFor(modelItem => item.Car.FullNameOfCar)</strong>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Mechanic.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a class="btn btn-outline-success">@Html.DisplayFor(modelItem => item.StatusRepair)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VisitDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td style="margin:10px;">
+                        @if (User.Identity.Name == companyMail)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i> </a>
+                        }
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" title="Details"></i> </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Car)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Mechanic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusRepair)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VisitDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Car.FullNameOfCar)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Mechanic.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusRepair)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VisitDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td style="margin:10px;">
-                @if (User.Identity.Name == companyMail)
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i> </a>
-                }
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" title="Details"></i> </a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+else
+{
+    <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+    <br />
+    <div>
+        <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
+    </div>
+}

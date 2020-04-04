@@ -1,5 +1,6 @@
 ﻿@model MechanicCompany.Models.RepairPart
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     Layout = null;
     var companyMail = ViewBag.CompanyMail;
@@ -10,50 +11,71 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Create</title>
+    <title>Add part to repair</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/fontawesome-free-5.12.1-web/css/all.css">
 </head>
-<body style="padding-left: 5px; padding-right: 5px; overflow-y: auto;">
-
-    <h4>Add part to repair</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="RepairRecordId" class="form-control" value="@ViewBag.RepairRecordId" />
-                <div class="form-group">
-                    <label asp-for="PartName" class="control-label"></label>
-                    <input asp-for="PartName" class="form-control" />
-                    <span asp-validation-for="PartName" class="text-danger"></span>
+<body style="padding: 5px; overflow-y: auto;">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @if (User.Identity.Name == companyMail)
+        {
+            <h4>Add part to repair</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="RepairRecordId" class="form-control" value="@ViewBag.RepairRecordId" />
+                        <div class="form-group">
+                            <label asp-for="PartName" class="control-label"></label>
+                            <input asp-for="PartName" class="form-control" />
+                            <span asp-validation-for="PartName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PartCompany" class="control-label"></label>
+                            <input asp-for="PartCompany" class="form-control" />
+                            <span asp-validation-for="PartCompany" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PartCost" class="control-label"></label>
+                            <input asp-for="PartCost" class="form-control" />
+                            <span asp-validation-for="PartCost" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PartQuantity" class="control-label"></label>
+                            <input asp-for="PartQuantity" class="form-control" />
+                            <span asp-validation-for="PartQuantity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add part</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label asp-for="PartCompany" class="control-label"></label>
-                    <input asp-for="PartCompany" class="form-control" />
-                    <span asp-validation-for="PartCompany" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="PartCost" class="control-label"></label>
-                    <input asp-for="PartCost" class="form-control" />
-                    <span asp-validation-for="PartCost" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="PartQuantity" class="control-label"></label>
-                    <input asp-for="PartQuantity" class="form-control" />
-                    <span asp-validation-for="PartQuantity" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add part</button>
-                </div>
-            </form>
+            </div>
+            <div>
+                <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to parts</a>
+            </div>
+        }
+        else
+        {
+            <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+            <br />
+            <div>
+                <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
+            </div>
+        }
+    }
+    else
+    {
+        <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+        <br />
+        <div>
+            <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
         </div>
-    </div>
+    }
 
-    <div>
-        <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to parts</a>
-    </div>
 
     @section Scripts {
         @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

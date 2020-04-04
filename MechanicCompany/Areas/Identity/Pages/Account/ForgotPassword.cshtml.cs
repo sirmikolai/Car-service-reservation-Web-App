@@ -55,10 +55,14 @@ namespace MechanicCompany.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
+                var Body = "<div style='width: 70%; float: center'><center>" +
+                        "<img src='https://i.imgur.com/JgvLADt.png' alt='Mechanic Company' height='99' width='300'/><hr>" +
+                        "<p></p><p></p><p>" + $"Please finish reset password for your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>." + "</p>" +
+                        "<hr><div><strong>Mechanic Company</strong><br>Armii Krajowej 36, 42-202 Częstochowa<br>" +
+                        "(48) 869 268 456<br>smtpserverforapp@gmail.com</div></center></div>";
+
                 await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    Input.Email, "Reset Password", Body);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

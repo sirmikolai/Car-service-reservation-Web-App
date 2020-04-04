@@ -131,8 +131,8 @@ namespace MechanicCompany.Areas.Identity.Pages.Account
                     var Body = "<div style='width: 70%; float: center'><center>" +
                         "<img src='https://i.imgur.com/JgvLADt.png' alt='Mechanic Company' height='99' width='300'/><hr>" +
                         "<p></p><p></p><p>" + $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>." + "</p>" +
-                        "<hr><p>Mechanic Company</p><p>Siewna 28, 42-201 Częstochowa</p><p>(48) 869 268 456</p><p>mikolaj.otreba@o2.pl</p>" +
-                        "</center></div>";
+                        "<hr><div><strong>Mechanic Company</strong><br>Armii Krajowej 36, 42-202 Częstochowa<br>" +
+                        "(48) 869 268 456<br>smtpserverforapp@gmail.com</div></center></div>";
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                        Body);

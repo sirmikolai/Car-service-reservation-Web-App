@@ -7,8 +7,10 @@ namespace MechanicCompany.Models
     public class RepairRecord
     {
         public int Id { get; set; }
+        [Display(Name = "Car")]
         public int CarId { get; set; }
         public Car Car { get; set; }
+        [Display(Name = "Mechanic")]
         public int MechanicId { get; set; }
         public Mechanic Mechanic { get; set; }
         public string Description { get; set; }

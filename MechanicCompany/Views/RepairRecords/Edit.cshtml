@@ -1,142 +1,167 @@
 ﻿@model MechanicCompany.Models.RepairRecord
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     ViewData["Title"] = "Edit repair";
     var statusOfRepair = ViewBag.StatusOfRepair;
+    var companyMail = ViewBag.CompanyMail;
+}
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.Identity.Name == companyMail)
+    {
+        <h1>Edit repair information</h1>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="CarId" class="control-label"></label>
+                        <select asp-for="CarId" class="form-control" readonly="readonly" asp-items="ViewBag.CarId"></select>
+                        <span asp-validation-for="CarId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MechanicId" class="control-label"></label>
+                        <select asp-for="MechanicId" class="form-control" asp-items="ViewBag.MechanicId"></select>
+                        <span asp-validation-for="MechanicId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" readonly="readonly" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StatusRepair" class="control-label"></label>
+                        <select asp-for="StatusRepair" class="form-control" asp-items="ViewBag.StatusRepair"></select>
+                    </div>
+                    @if (statusOfRepair == "Pending")
+                    {
+                        <div class="form-group">
+                            <label asp-for="VisitDate" class="control-label"></label>
+                            <input asp-for="VisitDate" class="form-control" />
+                            <span asp-validation-for="VisitDate" class="text-danger"></span>
+                        </div>
+                    }
+                    @if (statusOfRepair == "Approved")
+                    {
+                        <div class="form-group">
+                            <label asp-for="VisitDate" class="control-label"></label>
+                            <input asp-for="VisitDate" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="VisitDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="StartDate" class="control-label"></label>
+                            <input asp-for="StartDate" class="form-control" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                    }
+                    @if (statusOfRepair == "Started")
+                    {
+                        <div class="form-group">
+                            <label asp-for="VisitDate" class="control-label"></label>
+                            <input asp-for="VisitDate" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="VisitDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="StartDate" class="control-label"></label>
+                            <input asp-for="StartDate" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EndDate" class="control-label"></label>
+                            <input asp-for="EndDate" class="form-control" />
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LaborCost" class="control-label"></label>
+                            <input asp-for="LaborCost" class="form-control" />
+                            <span asp-validation-for="LaborCost" class="text-danger"></span>
+                        </div>
+                    }
+                    @if (statusOfRepair == "Fixed")
+                    {
+                        <div class="form-group">
+                            <label asp-for="VisitDate" class="control-label"></label>
+                            <input asp-for="VisitDate" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="VisitDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="StartDate" class="control-label"></label>
+                            <input asp-for="StartDate" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EndDate" class="control-label"></label>
+                            <input asp-for="EndDate" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LaborCost" class="control-label"></label>
+                            <input asp-for="LaborCost" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="LaborCost" class="text-danger"></span>
+                        </div>
+                    }
+                    @if (statusOfRepair == "Closed")
+                    {
+                        <div class="form-group">
+                            <label asp-for="VisitDate" class="control-label"></label>
+                            <input asp-for="VisitDate" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="VisitDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="StartDate" class="control-label"></label>
+                            <input asp-for="StartDate" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EndDate" class="control-label"></label>
+                            <input asp-for="EndDate" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="EndDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LaborCost" class="control-label"></label>
+                            <input asp-for="LaborCost" readonly="readonly" class="form-control" />
+                            <span asp-validation-for="LaborCost" class="text-danger"></span>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle"></i> Save changes</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-6">
+                <h4>Added parts to repair</h4>
+                <br />
+                <iframe id="partFrame" src='@Url.Action("Index", "RepairParts")' width="100%"
+                        height="100%" frameBorder="0" style="overflow: hidden;"></iframe>
+            </div>
+        </div>
+        <div>
+            <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to repairs</a>
+        </div>
+    }
+    else
+    {
+        <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+        <br />
+        <div>
+            <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
+        </div>
+    }
+}
+else
+{
+    <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+    <br />
+    <div>
+        <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
+    </div>
 }
 
-<h1>Edit repair information</h1>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="CarId" class="control-label"></label>
-                <select asp-for="CarId" class="form-control" readonly="readonly" asp-items="ViewBag.CarId"></select>
-                <span asp-validation-for="CarId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MechanicId" class="control-label"></label>
-                <select asp-for="MechanicId" class="form-control" asp-items="ViewBag.MechanicId"></select>
-                <span asp-validation-for="MechanicId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" readonly="readonly" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StatusRepair" class="control-label"></label>
-                <select asp-for="StatusRepair" class="form-control" asp-items="ViewBag.StatusRepair"></select>
-            </div>
-            @if (statusOfRepair == "Pending")
-            {
-                <div class="form-group">
-                    <label asp-for="VisitDate" class="control-label"></label>
-                    <input asp-for="VisitDate" class="form-control" />
-                    <span asp-validation-for="VisitDate" class="text-danger"></span>
-                </div>
-            }
-            @if (statusOfRepair == "Approved")
-            {
-                <div class="form-group">
-                    <label asp-for="VisitDate" class="control-label"></label>
-                    <input asp-for="VisitDate" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="VisitDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="StartDate" class="control-label"></label>
-                    <input asp-for="StartDate" class="form-control" />
-                    <span asp-validation-for="StartDate" class="text-danger"></span>
-                </div>
-            }
-            @if (statusOfRepair == "Started")
-            {
-                <div class="form-group">
-                    <label asp-for="VisitDate" class="control-label"></label>
-                    <input asp-for="VisitDate" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="VisitDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="StartDate" class="control-label"></label>
-                    <input asp-for="StartDate" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="StartDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EndDate" class="control-label"></label>
-                    <input asp-for="EndDate" class="form-control" />
-                    <span asp-validation-for="EndDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LaborCost" class="control-label"></label>
-                    <input asp-for="LaborCost" class="form-control" />
-                    <span asp-validation-for="LaborCost" class="text-danger"></span>
-                </div>
-            }
-            @if (statusOfRepair == "Fixed")
-            {
-                <div class="form-group">
-                    <label asp-for="VisitDate" class="control-label"></label>
-                    <input asp-for="VisitDate" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="VisitDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="StartDate" class="control-label"></label>
-                    <input asp-for="StartDate" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="StartDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EndDate" class="control-label"></label>
-                    <input asp-for="EndDate" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="EndDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LaborCost" class="control-label"></label>
-                    <input asp-for="LaborCost" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="LaborCost" class="text-danger"></span>
-                </div>
-            }
-            @if (statusOfRepair == "Closed")
-            {
-                <div class="form-group">
-                    <label asp-for="VisitDate" class="control-label"></label>
-                    <input asp-for="VisitDate" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="VisitDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="StartDate" class="control-label"></label>
-                    <input asp-for="StartDate" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="StartDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EndDate" class="control-label"></label>
-                    <input asp-for="EndDate" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="EndDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LaborCost" class="control-label"></label>
-                    <input asp-for="LaborCost" readonly="readonly" class="form-control" />
-                    <span asp-validation-for="LaborCost" class="text-danger"></span>
-                </div>
-            }
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle"></i> Save changes</button>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-6">
-        <iframe id="partFrame" src='@Url.Action("Index", "RepairParts")' width="100%"
-                height="100%" frameBorder="0" style="overflow: hidden;"></iframe>
-    </div>
-</div>
-<div>
-    <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to repairs</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

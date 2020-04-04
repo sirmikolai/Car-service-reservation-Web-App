@@ -1,148 +1,173 @@
 ﻿@model MechanicCompany.Models.RepairRecord
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     ViewData["Title"] = "Details about repair";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var companyMail = ViewBag.CompanyMail;
+    var userNameForCar = ViewBag.UserNameForCar;
     var costOfParts = ViewBag.CostOfParts;
     var allRepairCosts = ViewBag.AllRepairCosts;
 }
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.Identity.Name == companyMail || User.Identity.Name == userNameForCar)
+    {
+        <h1>Details about repair</h1>
 
-<h1>Details about repair</h1>
-
-<hr />
-<div class="row">
-    <div class="col-md-5">
-        <table class="repairDetails" width="100%">
-            <tr>
-                <td>
-                    <div>
-                        <strong>@Html.DisplayNameFor(model => model.Car)</strong>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        @Html.DisplayFor(model => model.Car.FullNameOfCar)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <strong>@Html.DisplayNameFor(model => model.Mechanic)</strong>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        @Html.DisplayFor(model => model.Mechanic.FullName)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <strong>@Html.DisplayNameFor(model => model.Description)</strong>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        @Html.DisplayFor(model => model.Description)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <strong>@Html.DisplayNameFor(model => model.StatusRepair)</strong>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        @Html.DisplayFor(model => model.StatusRepair)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <strong>@Html.DisplayNameFor(model => model.VisitDate)</strong>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        @Html.DisplayFor(model => model.VisitDate)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <strong>@Html.DisplayNameFor(model => model.StartDate)</strong>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        @Html.DisplayFor(model => model.StartDate)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <strong>@Html.DisplayNameFor(model => model.EndDate)</strong>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        @Html.DisplayFor(model => model.EndDate)
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <strong>@Html.DisplayNameFor(model => model.LaborCost)</strong>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        @Html.DisplayFor(model => model.LaborCost) $
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <strong>Cost of Parts</strong>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        @costOfParts $
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <strong>All repair costs</strong>
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        @allRepairCosts $
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <hr />
+        <div class="row">
+            <div class="col-md-5">
+                <table class="repairDetails" width="100%">
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>@Html.DisplayNameFor(model => model.Car)</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @Html.DisplayFor(model => model.Car.FullNameOfCar)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>@Html.DisplayNameFor(model => model.Mechanic)</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @Html.DisplayFor(model => model.Mechanic.FullName)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>@Html.DisplayNameFor(model => model.Description)</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @Html.DisplayFor(model => model.Description)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>@Html.DisplayNameFor(model => model.StatusRepair)</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @Html.DisplayFor(model => model.StatusRepair)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>@Html.DisplayNameFor(model => model.VisitDate)</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @Html.DisplayFor(model => model.VisitDate)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>@Html.DisplayNameFor(model => model.StartDate)</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @Html.DisplayFor(model => model.StartDate)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>@Html.DisplayNameFor(model => model.EndDate)</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @Html.DisplayFor(model => model.EndDate)
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>@Html.DisplayNameFor(model => model.LaborCost)</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @Html.DisplayFor(model => model.LaborCost) $
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>Cost of Parts</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @costOfParts $
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>
+                                <strong>All Repair's Costs</strong>
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                @allRepairCosts $
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-6">
+                <h4>Added parts to repair</h4>
+                <br />
+                <iframe id="partFrame" src='@Url.Action("Index", "RepairParts")' width="100%"
+                        height="100%" frameBorder="0" style="overflow: hidden;"></iframe>
+            </div>
+        </div>
+        <br />
+        <div>
+            <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to repairs</a>
+        </div>
+    }
+    else
+    {
+        <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+        <br />
+        <div>
+            <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
+        </div>
+    }
+}
+else
+{
+    <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+    <br />
+    <div>
+        <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
     </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-6">
-        <iframe id="partFrame" src='@Url.Action("Index", "RepairParts")' width="100%"
-                height="100%" frameBorder="0" style="overflow: hidden;"></iframe>
-    </div>
-</div>
-<br />
-<div>
-    <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to repairs</a>
-</div>
+}

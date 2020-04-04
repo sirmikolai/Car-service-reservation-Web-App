@@ -36,22 +36,37 @@ namespace MechanicCompany.Controllers
             var companyMail = _configuration.GetSection("CompanyMail").Value;
             ViewBag.CompanyMail = companyMail;
             var repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).AsEnumerable().Where(s => s.Car.ApplicationUserId.Equals(currentUserId)).ToList();
-            if (currentUserEmail.Equals(companyMail))
+            try
             {
-                repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).AsEnumerable().ToList();
+                if (currentUserEmail.Equals(companyMail))
+                {
+                    repairRecords = _context.RepairRecords.Include(r => r.Car).Include(r => r.Mechanic).AsEnumerable().ToList();
+                }
             }
+            catch (Exception)
+            { }
             if (!String.IsNullOrEmpty(searchString))
             {
                 repairRecords = repairRecords.Where(s => s.Car.FullNameOfCar.Contains(searchString)
+                                       || s.Car.FullNameOfCar.ToLower().Contains(searchString)
+                                       || s.Car.FullNameOfCar.ToUpper().Contains(searchString)
                                        || s.Mechanic.FullName.Contains(searchString)
+                                       || s.Mechanic.FullName.ToLower().Contains(searchString)
+                                       || s.Mechanic.FullName.ToUpper().Contains(searchString)
                                        || s.Description.Contains(searchString)
-                                       || s.StatusRepair.Contains(searchString)).AsEnumerable().ToList();
+                                       || s.Description.ToLower().Contains(searchString)
+                                       || s.Description.ToUpper().Contains(searchString)
+                                       || s.StatusRepair.Contains(searchString)
+                                       || s.StatusRepair.ToLower().Contains(searchString)
+                                       || s.StatusRepair.ToUpper().Contains(searchString)).AsEnumerable().ToList();
             }
             return View(repairRecords.ToList());
         }
 
         public async Task<IActionResult> Details(int? id)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             TempData["repairId"] = id.ToString();
             if (id == null)
             {
@@ -66,6 +81,21 @@ namespace MechanicCompany.Controllers
             {
                 return NotFound();
             }
+
+            var carId = _context.RepairRecords
+                .Include(r => r.Car)
+                .Include(r => r.Mechanic)
+                .Where(c => c.Id == id)
+                .Select(c => c.CarId)
+                .FirstOrDefault().ToString();
+
+            var userNameForCar = _context.Cars
+                .Include(c => c.ApplicationUser)
+                .Where(c => c.Id == int.Parse(carId))
+                .Select(d => d.ApplicationUser.Email)
+                .FirstOrDefault();
+
+            ViewData["UserNameForCar"] = userNameForCar;
 
             var repairRecordLaborCost = _context.RepairRecords
                 .Include(r => r.Car)
@@ -86,6 +116,8 @@ namespace MechanicCompany.Controllers
 
         public IActionResult Create()
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             ViewData["CarId"] = new SelectList(_context.Cars.Where(s => s.ApplicationUserId.Equals(currentUserId)), "Id", "FullNameOfCar");
             ViewData["MechanicId"] = new SelectList(_context.Mechanics, "Id", "FullName");
@@ -98,6 +130,8 @@ namespace MechanicCompany.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CarId,MechanicId,Description,StatusRepair,VisitDate,StartDate,EndDate,LaborCost")] RepairRecord repairRecord)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             if (ModelState.IsValid)
             {
                 _context.Add(repairRecord);
@@ -105,13 +139,14 @@ namespace MechanicCompany.Controllers
                 var ToAddress = _configuration.GetSection("CompanyMail").Value;
                 var userEmail = _context.Cars.Include(r => r.ApplicationUser).Where(r => r.Id.Equals(repairRecord.CarId)).Select(r => r.ApplicationUser.Email).FirstOrDefault().ToString();
                 var carName = _context.Cars.Where(r => r.Id.Equals(repairRecord.CarId)).Select(r => r.FullNameOfCar).FirstOrDefault().ToString();
+
                 var Body = "<div style='width: 70%; float: center'><center>" +
                     "<img src='https://i.imgur.com/JgvLADt.png' alt='Mechanic Company' height='99' width='300'/><hr>" +
-                    "<p></p><p></p><p>" + "User: " + userEmail + " create repair for car: " + carName + " - " + repairRecord.Description.ToString() + "</p>" +
-                    "<p>Please check details on our website. </p>" +
-                    "<hr><p>Mechanic Company</p><p>Siewna 28, 42-201 Częstochowa</p><p>(48) 869 268 456</p><p>mikolaj.otreba@o2.pl</p>" +
-                    "</center></div>";
-                await _emailSender.SendEmailAsync(ToAddress, "Repair for car: " + carName + " - " + repairRecord.Description.ToString() + " was created.", Body);
+                    "<p></p><p></p><p> User: " + userEmail + " create repair for car: " + carName + "</p><p>Description: " +
+                    repairRecord.Description.ToString() + "</p><p>Please check details on our website.</p>" +
+                    "<hr><div><strong>Mechanic Company</strong><br>Armii Krajowej 36, 42-202 Częstochowa<br>" +
+                    "(48) 869 268 456<br>smtpserverforapp@gmail.com</div></center></div>";
+                await _emailSender.SendEmailAsync(ToAddress, "Repair for car: " + carName + " was created.", Body);
                 return RedirectToAction(nameof(Index));
             }
             var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -124,6 +159,8 @@ namespace MechanicCompany.Controllers
         // GET: RepairRecords/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             TempData["repairId"] = id.ToString();
             if (id == null)
             {
@@ -153,6 +190,8 @@ namespace MechanicCompany.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CarId,MechanicId,Description,StatusRepair,VisitDate,StartDate,EndDate,LaborCost")] RepairRecord repairRecord)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             if (id != repairRecord.Id)
             {
                 return NotFound();
@@ -168,11 +207,12 @@ namespace MechanicCompany.Controllers
                     var carName = _context.Cars.Where(r => r.Id.Equals(repairRecord.CarId)).Select(r => r.FullNameOfCar).FirstOrDefault().ToString();
                     var Body = "<div style='width: 70%; float: center'><center>" +
                         "<img src='https://i.imgur.com/JgvLADt.png' alt='Mechanic Company' height='99' width='300'/><hr>" +
-                        "<p></p><p></p><p>" + "Repair about your car: " + carName + " - " + repairRecord.Description.ToString() + " was update. </p>" +
-                        "<p>Please check details on our website. </p>" +
-                        "<hr><p>Mechanic Company</p><p>Siewna 28, 42-201 Częstochowa</p><p>(48) 869 268 456</p><p>mikolaj.otreba@o2.pl</p>" +
-                        "</center></div>";
-                    await _emailSender.SendEmailAsync(userEmail, "Repair for car: " + carName + " - " + repairRecord.Description.ToString() + " was update.", Body);
+                        "<p></p><p></p><p> Repair about your car: " + carName + " was update. </p><p>Description: " +
+                        repairRecord.Description.ToString() + "</p><p>Please check details on our website.</p>" +
+                        "<hr><div><strong>Mechanic Company</strong><br>Armii Krajowej 36, 42-202 Częstochowa<br>" +
+                        "(48) 869 268 456<br>smtpserverforapp@gmail.com</div></center></div>";
+
+                    await _emailSender.SendEmailAsync(userEmail, "Repair for car: " + carName + " was update.", Body);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -195,6 +235,8 @@ namespace MechanicCompany.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             if (id == null)
             {
                 return NotFound();
@@ -216,6 +258,8 @@ namespace MechanicCompany.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            var companyMail = _configuration.GetSection("CompanyMail").Value;
+            ViewBag.CompanyMail = companyMail;
             var repairRecord = await _context.RepairRecords.FindAsync(id);
             _context.RepairRecords.Remove(repairRecord);
             await _context.SaveChangesAsync();

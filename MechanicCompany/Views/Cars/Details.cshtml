@@ -1,78 +1,101 @@
 ﻿@model MechanicCompany.Models.Car
-
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 @{
     ViewData["Title"] = "Details about car";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var companyMail = ViewBag.CompanyMail;
+    var userNameForCar = ViewBag.UserNameForCar;
 }
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.Identity.Name == companyMail || User.Identity.Name == userNameForCar)
+    {
+        <h1>Details about car</h1>
 
-<h1>Details about car</h1>
-
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ApplicationUser)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ApplicationUser.FullName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CarBrand)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CarBrand)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CarModel)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CarModel)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductionYear)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProductionYear)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EngineVolume)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EngineVolume)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EngineName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EngineName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EnginePower)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EnginePower)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EngineTypeOfFuel)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EngineTypeOfFuel)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CarTypeOfBody)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CarTypeOfBody)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RegistrationNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RegistrationNumber)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to cars</a>
-</div>
+        <div>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ApplicationUser)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ApplicationUser.FullName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CarBrand)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CarBrand)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CarModel)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CarModel)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ProductionYear)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ProductionYear)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.EngineVolume)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.EngineVolume)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.EngineName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.EngineName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.EnginePower)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.EnginePower)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.EngineTypeOfFuel)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.EngineTypeOfFuel)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CarTypeOfBody)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CarTypeOfBody)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.RegistrationNumber)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.RegistrationNumber)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Index" class="btn btn-outline-info"><i class="fa fa-chevron-circle-left"></i> Back to cars</a>
+        </div>
+    }
+    else
+    {
+        <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+        <br />
+        <div>
+            <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
+        </div>
+    }
+}
+else
+{
+    <h1><i class="fa fa-times-circle" style="color: darkred;"></i> Ooops something gone wrong!</h1>
+    <br />
+    <div>
+        <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
+    </div>
+}
