@@ -4,6 +4,7 @@
     Layout = "_Layout.cshtml";
     ViewData["Title"] = "Delete Personal Data";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
+    var companyMail = ViewBag.CompanyMail;
 }
 
 <h4>@ViewData["Title"]</h4>
@@ -21,7 +22,7 @@
         {
             <div class="form-group">
                 <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
+                <input asp-for="Input.Password" class="form-control" placeholder="Enter Password"/>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
         }

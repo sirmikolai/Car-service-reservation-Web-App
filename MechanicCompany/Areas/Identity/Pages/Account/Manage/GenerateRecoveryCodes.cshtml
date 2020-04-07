@@ -4,6 +4,7 @@
     Layout = "_Layout.cshtml";
     ViewData["Title"] = "Generate two-factor authentication (2FA) recovery codes";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+    var companyMail = ViewBag.CompanyMail;
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />

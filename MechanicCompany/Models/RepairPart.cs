@@ -12,8 +12,9 @@ namespace MechanicCompany.Models
         [Display(Name = "Part Company")]
         public string PartCompany { get; set; }
         [Display(Name = "Part Cost")]
-        public double PartCost { get; set; }
+        [Range(0, 999999.99, ErrorMessage = "Invalid Target Price; Max 8 digits")]
+        public decimal PartCost { get; set; }
         [Display(Name = "Part Quantity")]
-        public double PartQuantity { get; set; }
+        public int PartQuantity { get; set; }
     }
 }

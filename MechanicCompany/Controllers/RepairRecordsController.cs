@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Rotativa.AspNetCore;
 using System;
 using System.Linq;
 using System.Security.Claims;
@@ -29,7 +30,7 @@ namespace MechanicCompany.Controllers
             _configuration = configuration;
         }
 
-        public ViewResult Index(string searchString)
+        public ActionResult Index(string searchString)
         {
             var currentUserId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             var currentUserEmail = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name);
@@ -96,21 +97,28 @@ namespace MechanicCompany.Controllers
                 .FirstOrDefault();
 
             ViewData["UserNameForCar"] = userNameForCar;
+            try
+            {
+                var repairRecordLaborCost = _context.RepairRecords
+                    .Include(r => r.Car)
+                    .Include(r => r.Mechanic)
+                    .Where(c => c.Id == id)
+                    .Select(c => c.LaborCost)
+                    .FirstOrDefault();
 
-            var repairRecordLaborCost = _context.RepairRecords
-                .Include(r => r.Car)
-                .Include(r => r.Mechanic)
-                .Where(c => c.Id == id)
-                .Select(c => c.LaborCost)
-                .FirstOrDefault().ToString();
+                var repairPartsCost = _context.RepairParts
+                    .Include(r => r.RepairRecord)
+                    .Where(m => m.RepairRecordId == id)
+                    .Sum(r => r.PartCost * r.PartQuantity);
 
-            var repairPartsCost = _context.RepairParts
-                .Include(r => r.RepairRecord)
-                .Where(m => m.RepairRecordId == id)
-                .Sum(r => r.PartCost * r.PartQuantity);
-
-            ViewData["CostOfParts"] = repairPartsCost.ToString();
-            ViewData["AllRepairCosts"] = Double.Parse(repairPartsCost.ToString()) + Double.Parse(repairRecordLaborCost.ToString());
+                ViewData["CostOfParts"] = repairPartsCost.ToString()[0..^2];
+                ViewData["AllRepairCosts"] = (Decimal.Parse(repairPartsCost.ToString()) + Decimal.Parse(repairRecordLaborCost.ToString())).ToString()[0..^2];
+            }
+            catch (Exception)
+            {
+                ViewData["CostOfParts"] = "0,00";
+                ViewData["AllRepairCosts"] = "0,00";
+            }
             return View(repairRecord);
         }
 
@@ -271,5 +279,50 @@ namespace MechanicCompany.Controllers
             return _context.RepairRecords.Any(e => e.Id == id);
         }
 
+        public IActionResult Invoice()
+        {
+            string id = "0";
+            if (TempData["repairId"] != null)
+                id = TempData["repairId"] as string;
+            TempData.Keep();
+            DateTime date = DateTime.Today;
+            string year = date.Year.ToString();
+            var repairParts = _context.RepairParts.Include(w => w.RepairRecord).Where(w => w.RepairRecordId == int.Parse(id));
+            try
+            {
+                #region DatabaseHelpers
+                var repairRecord = _context.RepairRecords.Include(w => w.Car).Include(w => w.Mechanic).Where(r => r.Id == int.Parse(id));
+                var carId = repairRecord.Select(r => r.CarId).FirstOrDefault();
+                var car = _context.Cars.Include(w => w.ApplicationUser).Where(r => r.Id == carId);
+                var userId = car.Select(r => r.ApplicationUserId).FirstOrDefault();
+                var user = _context.ApplicationUsers.Where(w => w.Id == userId);
+                var costOfParts = _context.RepairParts.Include(r => r.RepairRecord).Where(m => m.RepairRecordId == int.Parse(id)).Sum(r => r.PartCost * r.PartQuantity);
+                var laborCost = repairRecord.Select(w => w.LaborCost).FirstOrDefault();
+                #endregion
+                #region ViewDataHelpers
+                ViewData["Year"] = year;
+                ViewData["DateOfIssue"] = repairRecord.Select(r => r.EndDate).FirstOrDefault().Value.Date.ToShortDateString();
+                ViewData["LaborCost"] = Decimal.Parse(laborCost.ToString());
+                ViewData["AllRepairCost"] = (costOfParts + Decimal.Parse(laborCost.ToString() + ",00")).ToString()[0..^2];
+                ViewData["UserName"] = user.Select(r => r.FullName).FirstOrDefault();
+                ViewData["UserAddress"] = user.Select(r => r.Address).FirstOrDefault();
+                ViewData["UserZipCodeAndCity"] = user.Select(r => r.ZipCode + " " + r.City).FirstOrDefault();
+                ViewData["UserPhone"] = user.Select(r => r.PhoneNumber).FirstOrDefault();
+                ViewData["UserEmail"] = user.Select(r => r.Email).FirstOrDefault();
+                ViewData["CarBrand"] = car.Select(r => r.CarBrand).FirstOrDefault();
+                ViewData["CarModel"] = car.Select(r => r.CarModel).FirstOrDefault();
+                ViewData["ProductionDate"] = car.Select(r => r.ProductionYear).FirstOrDefault().Date.ToShortDateString();
+                ViewData["Engine"] = car.Select(r => r.EngineVolume + " " + r.EngineName + " - " + r.EnginePower + "hp - " + r.EngineTypeOfFuel).FirstOrDefault();
+                ViewData["TypeOfBody"] = car.Select(r => r.CarTypeOfBody).FirstOrDefault();
+                ViewData["RegistrationNumber"] = car.Select(r => r.RegistrationNumber).FirstOrDefault();
+                #endregion
+            }
+            catch (Exception)
+            {}
+
+            return new ViewAsPdf(repairParts, ViewData) { FileName = String.Format("Proforma_Invoice_{0}.pdf", year + "/" + id) }; ;
+        }
+
     }
+
 }

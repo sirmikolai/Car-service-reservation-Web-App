@@ -4,6 +4,7 @@
     Layout = "_Layout.cshtml";
     ViewData["Title"] = "Configure authenticator app";
     ViewData["ActivePage"] = ManageNavPages.TwoFactorAuthentication;
+    var companyMail = ViewBag.CompanyMail;
 }
 
 <partial name="_StatusMessage" for="StatusMessage" />
@@ -38,7 +39,7 @@
                     <form id="send-code" method="post">
                         <div class="form-group">
                             <label asp-for="Input.Code" class="control-label">Verification Code</label>
-                            <input asp-for="Input.Code" class="form-control" autocomplete="off" />
+                            <input asp-for="Input.Code" class="form-control" autocomplete="off" placeholder="Enter Code"/>
                             <span asp-validation-for="Input.Code" class="text-danger"></span>
                         </div>
                         <button type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Verify</button>

@@ -3,6 +3,7 @@ using MechanicCompany.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -27,13 +28,18 @@ namespace MechanicCompany.Controllers
             if (TempData["repairId"] != null)
                 id = TempData["repairId"] as string;
             TempData.Keep();
-            var repairRecordRepairStatus = _context.RepairRecords
-                .Include(r => r.Car)
+            var repairRecordRepairStatus = "null";
+            try
+            {
+                repairRecordRepairStatus = _context.RepairRecords
+                 .Include(r => r.Car)
                 .Include(r => r.Mechanic)
                 .Where(c => c.Id == int.Parse(id))
                 .Select(c => c.StatusRepair)
                 .FirstOrDefault().ToString();
-
+            }
+            catch (Exception)
+            { }
             ViewData["StatusOfRepair"] = repairRecordRepairStatus;
             var applicationDbContext = _context.RepairParts.Include(r => r.RepairRecord).Where(w => w.RepairRecordId == int.Parse(id));
             return View(await applicationDbContext.ToListAsync());

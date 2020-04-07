@@ -94,14 +94,14 @@ namespace MechanicCompany.Migrations
                     b.Property<string>("PartCompany")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("PartCost")
-                        .HasColumnType("float");
+                    b.Property<decimal>("PartCost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PartName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("PartQuantity")
-                        .HasColumnType("float");
+                    b.Property<int>("PartQuantity")
+                        .HasColumnType("int");
 
                     b.Property<int>("RepairRecordId")
                         .HasColumnType("int");

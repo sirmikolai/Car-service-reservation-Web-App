@@ -16,13 +16,16 @@
             <div class="col-md-4">
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="LaborCost" hidden="hidden" class="form-control" value="0,00" />
                     <div class="form-group">
-                        <label asp-for="CarId" class="control-label"></label>
+                        <label asp-for="Car" class="control-label"></label>
                         <select asp-for="CarId" class="form-control" asp-items="ViewBag.CarId"></select>
+                        <span asp-validation-for="CarId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="MechanicId" class="control-label"></label>
+                        <label asp-for="Mechanic" class="control-label"></label>
                         <select asp-for="MechanicId" class="form-control" asp-items="ViewBag.MechanicId"></select>
+                        <span asp-validation-for="MechanicId" class="text-danger"></span>
                     </div>
                     <input asp-for="StatusRepair" class="form-control" hidden="hidden" value="@ViewBag.StatusRepair2" />
                     <div class="form-group">
@@ -32,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" />
+                        <input asp-for="Description" class="form-control" placeholder="Enter Description" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">

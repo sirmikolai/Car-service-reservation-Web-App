@@ -30,22 +30,10 @@
                     @Html.DisplayNameFor(model => model.Car)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Mechanic)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.Description)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.StatusRepair)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VisitDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StartDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.EndDate)
                 </th>
                 <th></th>
             </tr>
@@ -58,30 +46,18 @@
                         <strong>@Html.DisplayFor(modelItem => item.Car.FullNameOfCar)</strong>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Mechanic.FullName)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
                         <a class="btn btn-outline-success">@Html.DisplayFor(modelItem => item.StatusRepair)</a>
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.VisitDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDate)
-                    </td>
-                    <td style="margin:10px;">
+                    <td >
                         @if (User.Identity.Name == companyMail)
                         {
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i> </a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" style="margin: 4px;" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" style="margin: 4px;" class="btn btn-outline-danger"><i class="fa fa-minus-circle" title="Delete"></i> </a>
                         }
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary"><i class="fa fa-info-circle" title="Details"></i> </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" style="margin: 4px;" class="btn btn-outline-primary"><i class="fa fa-info-circle" title="Details"></i> </a>
                     </td>
                 </tr>
             }
