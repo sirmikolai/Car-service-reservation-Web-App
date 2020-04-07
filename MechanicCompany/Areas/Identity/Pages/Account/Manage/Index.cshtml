@@ -20,23 +20,28 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.FirstName"></label>
-                <input asp-for="Input.FirstName" class="form-control" placeholder="Enter First Name"/>
+                <input asp-for="Input.FirstName" class="form-control" placeholder="Enter First Name" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.LastName"></label>
-                <input asp-for="Input.LastName" class="form-control" placeholder="Enter Last Name"/>
+                <input asp-for="Input.LastName" class="form-control" placeholder="Enter Last Name" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.Adress"></label>
-                <input asp-for="Input.Adress" class="form-control" placeholder="Enter Address"/>
+                <label asp-for="Input.Address"></label>
+                <input asp-for="Input.Address" class="form-control" placeholder="Enter Address" />
+                <span asp-validation-for="Input.Address" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.ZipCode"></label>
-                <input asp-for="Input.ZipCode" class="form-control" placeholder="Enter Zip Code"/>
+                <input asp-for="Input.ZipCode" class="form-control" placeholder="Enter Zip Code" />
+                <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.City"></label>
-                <input asp-for="Input.City" class="form-control" placeholder="Enter City"/>
+                <input asp-for="Input.City" class="form-control" placeholder="Enter City" />
+                <span asp-validation-for="Input.City" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.PhoneNumber"></label>

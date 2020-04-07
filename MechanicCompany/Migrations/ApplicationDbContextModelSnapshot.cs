@@ -30,21 +30,27 @@ namespace MechanicCompany.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CarBrand")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CarModel")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CarTypeOfBody")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EngineName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EnginePower")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EngineTypeOfFuel")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EngineVolume")
@@ -54,6 +60,7 @@ namespace MechanicCompany.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RegistrationNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -129,8 +136,8 @@ namespace MechanicCompany.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("LaborCost")
-                        .HasColumnType("float");
+                    b.Property<decimal>("LaborCost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("MechanicId")
                         .HasColumnType("int");

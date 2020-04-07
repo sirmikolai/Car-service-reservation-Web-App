@@ -51,7 +51,7 @@
                     <td>
                         <a class="btn btn-outline-success">@Html.DisplayFor(modelItem => item.StatusRepair)</a>
                     </td>
-                    <td >
+                    <td>
                         @if (User.Identity.Name == companyMail)
                         {
                             <a asp-action="Edit" asp-route-id="@item.Id" style="margin: 4px;" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>

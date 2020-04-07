@@ -73,12 +73,11 @@ namespace MechanicCompany.Areas.Identity.Pages.Account
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Adress")]
-            public string Adress { get; set; }
+            [Display(Name = "Address")]
+            public string Address { get; set; }
 
             [Required]
-            [StringLength(6, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 5)]
-            [DataType(DataType.Text)]
+            [DataType(DataType.PostalCode)]
             [Display(Name = "Zip code")]
             public string ZipCode { get; set; }
 
@@ -111,7 +110,7 @@ namespace MechanicCompany.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    Address = Input.Adress,
+                    Address = Input.Address,
                     ZipCode = Input.ZipCode,
                     City = Input.City,
                     PhoneNumber = Input.PhoneNumber

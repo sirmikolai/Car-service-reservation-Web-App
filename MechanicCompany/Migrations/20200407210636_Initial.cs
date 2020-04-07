@@ -180,15 +180,15 @@ namespace MechanicCompany.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ApplicationUserId = table.Column<string>(nullable: true),
-                    CarBrand = table.Column<string>(nullable: true),
-                    CarModel = table.Column<string>(nullable: true),
+                    CarBrand = table.Column<string>(nullable: false),
+                    CarModel = table.Column<string>(nullable: false),
                     ProductionYear = table.Column<DateTime>(nullable: false),
                     EngineVolume = table.Column<int>(nullable: false),
-                    EngineName = table.Column<string>(nullable: true),
-                    EnginePower = table.Column<string>(nullable: true),
-                    EngineTypeOfFuel = table.Column<string>(nullable: true),
-                    CarTypeOfBody = table.Column<string>(nullable: true),
-                    RegistrationNumber = table.Column<string>(nullable: true)
+                    EngineName = table.Column<string>(nullable: false),
+                    EnginePower = table.Column<string>(nullable: false),
+                    EngineTypeOfFuel = table.Column<string>(nullable: false),
+                    CarTypeOfBody = table.Column<string>(nullable: false),
+                    RegistrationNumber = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

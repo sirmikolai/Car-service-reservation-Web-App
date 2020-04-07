@@ -16,7 +16,6 @@
             <div class="col-md-4">
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input asp-for="LaborCost" hidden="hidden" class="form-control" value="0,00" />
                     <div class="form-group">
                         <label asp-for="Car" class="control-label"></label>
                         <select asp-for="CarId" class="form-control" asp-items="ViewBag.CarId"></select>

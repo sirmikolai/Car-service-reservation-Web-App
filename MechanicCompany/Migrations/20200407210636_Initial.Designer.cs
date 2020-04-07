@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MechanicCompany.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200407191352_Initial4")]
-    partial class Initial4
+    [Migration("20200407210636_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,21 +32,27 @@ namespace MechanicCompany.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CarBrand")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CarModel")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CarTypeOfBody")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EngineName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EnginePower")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EngineTypeOfFuel")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EngineVolume")
@@ -56,6 +62,7 @@ namespace MechanicCompany.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RegistrationNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -131,8 +138,8 @@ namespace MechanicCompany.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("LaborCost")
-                        .HasColumnType("float");
+                    b.Property<decimal>("LaborCost")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("MechanicId")
                         .HasColumnType("int");

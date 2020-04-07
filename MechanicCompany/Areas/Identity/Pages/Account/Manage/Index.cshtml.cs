@@ -47,11 +47,11 @@ namespace MechanicCompany.Areas.Identity.Pages.Account.Manage
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Adress")]
-            public string Adress { get; set; }
+            [Display(Name = "Address")]
+            public string Address { get; set; }
 
             [Required]
-            [DataType(DataType.Text)]
+            [DataType(DataType.PostalCode)]
             [Display(Name = "Zip code")]
             public string ZipCode { get; set; }
 
@@ -72,7 +72,7 @@ namespace MechanicCompany.Areas.Identity.Pages.Account.Manage
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                Adress = user.Address,
+                Address = user.Address,
                 ZipCode = user.ZipCode,
                 City = user.City,
                 PhoneNumber = phoneNumber
@@ -126,9 +126,9 @@ namespace MechanicCompany.Areas.Identity.Pages.Account.Manage
                 user.LastName = Input.LastName;
             }
 
-            if (Input.Adress != user.Address)
+            if (Input.Address != user.Address)
             {
-                user.Address = Input.Adress;
+                user.Address = Input.Address;
             }
 
             if (Input.ZipCode != user.ZipCode)

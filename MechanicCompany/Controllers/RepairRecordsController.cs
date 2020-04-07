@@ -302,8 +302,8 @@ namespace MechanicCompany.Controllers
                 #region ViewDataHelpers
                 ViewData["Year"] = year;
                 ViewData["DateOfIssue"] = repairRecord.Select(r => r.EndDate).FirstOrDefault().Value.Date.ToShortDateString();
-                ViewData["LaborCost"] = Decimal.Parse(laborCost.ToString());
-                ViewData["AllRepairCost"] = (costOfParts + Decimal.Parse(laborCost.ToString() + ",00")).ToString()[0..^2];
+                ViewData["LaborCost"] = laborCost;
+                ViewData["AllRepairCost"] = (costOfParts + laborCost).ToString()[0..^2];
                 ViewData["UserName"] = user.Select(r => r.FullName).FirstOrDefault();
                 ViewData["UserAddress"] = user.Select(r => r.Address).FirstOrDefault();
                 ViewData["UserZipCodeAndCity"] = user.Select(r => r.ZipCode + " " + r.City).FirstOrDefault();
