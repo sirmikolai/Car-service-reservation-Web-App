@@ -164,7 +164,6 @@ namespace MechanicCompany.Controllers
             return View(repairRecord);
         }
 
-        // GET: RepairRecords/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
@@ -180,10 +179,12 @@ namespace MechanicCompany.Controllers
             {
                 return NotFound();
             }
-            var repairRecordRepairStatus = _context.RepairRecords
+
+            var repairRecordContext = _context.RepairRecords
                 .Include(r => r.Car)
                 .Include(r => r.Mechanic)
-                .Where(c => c.Id == id)
+                .Where(c => c.Id == id);
+            var repairRecordRepairStatus = repairRecordContext
                 .Select(c => c.StatusRepair)
                 .FirstOrDefault().ToString();
 
@@ -191,6 +192,7 @@ namespace MechanicCompany.Controllers
             ViewData["MechanicId"] = new SelectList(_context.Mechanics, "Id", "FullName");
             ViewData["StatusRepair"] = RepairRecordHelper.getRepairStatus();
             ViewData["StatusOfRepair"] = repairRecordRepairStatus;
+            ViewData["LaborCost"] = repairRecordContext.Select(c => c.LaborCost).FirstOrDefault().ToString()[0..^3];
             return View(repairRecord);
         }
 

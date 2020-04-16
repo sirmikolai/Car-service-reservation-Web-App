@@ -44,6 +44,7 @@
                             <input asp-for="VisitDate" class="form-control" />
                             <span asp-validation-for="VisitDate" class="text-danger"></span>
                         </div>
+                        <input type="hidden" asp-for="LaborCost" value="@ViewBag.LaborCost" />
                     }
                     @if (statusOfRepair == "Approved")
                     {
@@ -57,6 +58,7 @@
                             <input asp-for="StartDate" class="form-control" />
                             <span asp-validation-for="StartDate" class="text-danger"></span>
                         </div>
+                        <input type="hidden" asp-for="LaborCost" value="@ViewBag.LaborCost" />
                     }
                     @if (statusOfRepair == "Started")
                     {
@@ -77,7 +79,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="LaborCost" class="control-label"></label>
-                            <input asp-for="LaborCost" class="form-control" placeholder="Enter Labor Cost"/>
+                            <input asp-for="LaborCost" class="form-control" value="@ViewBag.LaborCost" placeholder="Enter Labor Cost" />
                             <span asp-validation-for="LaborCost" class="text-danger"></span>
                         </div>
                     }
@@ -100,7 +102,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="LaborCost" class="control-label"></label>
-                            <input asp-for="LaborCost" readonly="readonly" class="form-control" />
+                            <input asp-for="LaborCost" readonly="readonly" class="form-control" value="@ViewBag.LaborCost" />
                             <span asp-validation-for="LaborCost" class="text-danger"></span>
                         </div>
                     }
@@ -123,7 +125,7 @@
                         </div>
                         <div class="form-group">
                             <label asp-for="LaborCost" class="control-label"></label>
-                            <input asp-for="LaborCost"  class="form-control" />
+                            <input asp-for="LaborCost" readonly="readonly" class="form-control" value="@ViewBag.LaborCost" />
                             <span asp-validation-for="LaborCost" class="text-danger"></span>
                         </div>
                     }
