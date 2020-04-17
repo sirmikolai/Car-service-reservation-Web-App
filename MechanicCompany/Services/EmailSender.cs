@@ -7,11 +7,11 @@ namespace MechanicCompany.Services
 {
     public class EmailSender : IEmailSender
     {
-        private string host;
-        private int port;
-        private bool enableSSL;
-        private string userName;
-        private string password;
+        private readonly string host;
+        private readonly int port;
+        private readonly bool enableSSL;
+        private readonly string userName;
+        private readonly string password;
 
         public EmailSender(string host, int port, bool enableSSL, string userName, string password)
         {

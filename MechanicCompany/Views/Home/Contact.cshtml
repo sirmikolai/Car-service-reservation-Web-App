@@ -19,15 +19,25 @@
         <form action="/Home/SendEmail" method="post">
             <div class="form-group">
                 <label class="control-label">Your email</label>
-                <input name="YourAddress" class="form-control" style="width:100%;" placeholder="Enter Email"/>
+                <div class="input-group">
+                    <input name="YourAddress" class="form-control" placeholder="Enter Email" />
+                    <div class="input-group-append">
+                        <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-envelope"></i></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label class="control-label">Subject</label>
-                <input name="Subject" class="form-control" style="width:100%;" placeholder="Enter Subject"/>
+                <div class="input-group">
+                    <input name="Subject" class="form-control" placeholder="Enter Subject" />
+                    <div class="input-group-append">
+                        <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-comment-dots"></i></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label class="control-label">Message</label>
-                <textarea class="form-control" name="Body" style="width:100%;height:150px;overflow:hidden;" placeholder="Enter Message"></textarea>
+                <textarea class="form-control" name="Body" style="width:100%; height:150px; overflow:hidden;" placeholder="Enter Message"></textarea>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary"><i class="fa fa-chevron-circle-right"></i> Send</button>

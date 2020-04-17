@@ -320,7 +320,7 @@ namespace MechanicCompany.Controllers
                 #endregion
             }
             catch (Exception)
-            {}
+            { }
 
             return new ViewAsPdf(repairParts, ViewData) { FileName = String.Format("Proforma_Invoice_{0}.pdf", year + "/" + id) }; ;
         }

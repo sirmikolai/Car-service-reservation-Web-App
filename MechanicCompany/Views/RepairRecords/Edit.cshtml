@@ -19,116 +19,84 @@
                     <input type="hidden" asp-for="Id" />
                     <div class="form-group">
                         <label asp-for="Car" class="control-label"></label>
-                        <select asp-for="CarId" class="form-control" readonly="readonly" asp-items="ViewBag.CarId"></select>
+                        <div class="input-group">
+                            <select asp-for="CarId" class="form-control" readonly="readonly" asp-items="ViewBag.CarId"></select>
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-car-alt"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="CarId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Car" class="control-label"></label>
-                        <select asp-for="MechanicId" class="form-control" asp-items="ViewBag.MechanicId"></select>
+                        <div class="input-group">
+                            <select asp-for="MechanicId" class="form-control" id="MechanicId" asp-items="ViewBag.MechanicId"></select>
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="MechanicId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" readonly="readonly" />
+                        <div class="input-group">
+                            <input asp-for="Description" class="form-control" readonly="readonly" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="StatusRepair" class="control-label"></label>
-                        <select asp-for="StatusRepair" class="form-control" asp-items="ViewBag.StatusRepair"></select>
+                        <div class="input-group">
+                            <select asp-for="StatusRepair" class="form-control" id="StatusRepair" onchange="statusRepair()" asp-items="ViewBag.StatusRepair"></select>
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="StatusRepair" class="text-danger"></span>
                     </div>
-                    @if (statusOfRepair == "Pending")
-                    {
-                        <div class="form-group">
-                            <label asp-for="VisitDate" class="control-label"></label>
-                            <input asp-for="VisitDate" class="form-control" />
-                            <span asp-validation-for="VisitDate" class="text-danger"></span>
+                    <div class="form-group">
+                        <label asp-for="VisitDate" class="control-label"></label>
+                        <div class="input-group">
+                            <input asp-for="VisitDate" class="form-control" id="VisitDate" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-calendar-day"></i></span>
+                            </div>
                         </div>
-                        <input type="hidden" asp-for="LaborCost" value="@ViewBag.LaborCost" />
-                    }
-                    @if (statusOfRepair == "Approved")
-                    {
-                        <div class="form-group">
-                            <label asp-for="VisitDate" class="control-label"></label>
-                            <input asp-for="VisitDate" readonly="readonly" class="form-control" />
-                            <span asp-validation-for="VisitDate" class="text-danger"></span>
+                        <span asp-validation-for="VisitDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartDate" class="control-label"></label>
+                        <div class="input-group">
+                            <input asp-for="StartDate" class="form-control" id="StartDate" onchange="startDateValidation()" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-calendar-day"></i></span>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="StartDate" class="control-label"></label>
-                            <input asp-for="StartDate" class="form-control" />
-                            <span asp-validation-for="StartDate" class="text-danger"></span>
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndDate" class="control-label"></label>
+                        <div class="input-group">
+                            <input asp-for="EndDate" class="form-control" id="EndDate" onchange="endDateValidation()"/>
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-calendar-day"></i></span>
+                            </div>
                         </div>
-                        <input type="hidden" asp-for="LaborCost" value="@ViewBag.LaborCost" />
-                    }
-                    @if (statusOfRepair == "Started")
-                    {
-                        <div class="form-group">
-                            <label asp-for="VisitDate" class="control-label"></label>
-                            <input asp-for="VisitDate" readonly="readonly" class="form-control" />
-                            <span asp-validation-for="VisitDate" class="text-danger"></span>
+                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LaborCost" class="control-label"></label>
+                        <div class="input-group">
+                            <input asp-for="LaborCost" class="form-control" id="LaborCost" value="@ViewBag.LaborCost" placeholder="Enter Labor Cost" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-dollar-sign" style="padding-left: 1px; padding-right: 2px;"></i></span>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="StartDate" class="control-label"></label>
-                            <input asp-for="StartDate" readonly="readonly" class="form-control" />
-                            <span asp-validation-for="StartDate" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="EndDate" class="control-label"></label>
-                            <input asp-for="EndDate" class="form-control" />
-                            <span asp-validation-for="EndDate" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="LaborCost" class="control-label"></label>
-                            <input asp-for="LaborCost" class="form-control" value="@ViewBag.LaborCost" placeholder="Enter Labor Cost" />
-                            <span asp-validation-for="LaborCost" class="text-danger"></span>
-                        </div>
-                    }
-                    @if (statusOfRepair == "Fixed")
-                    {
-                        <div class="form-group">
-                            <label asp-for="VisitDate" class="control-label"></label>
-                            <input asp-for="VisitDate" readonly="readonly" class="form-control" />
-                            <span asp-validation-for="VisitDate" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="StartDate" class="control-label"></label>
-                            <input asp-for="StartDate" readonly="readonly" class="form-control" />
-                            <span asp-validation-for="StartDate" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="EndDate" class="control-label"></label>
-                            <input asp-for="EndDate" readonly="readonly" class="form-control" />
-                            <span asp-validation-for="EndDate" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="LaborCost" class="control-label"></label>
-                            <input asp-for="LaborCost" readonly="readonly" class="form-control" value="@ViewBag.LaborCost" />
-                            <span asp-validation-for="LaborCost" class="text-danger"></span>
-                        </div>
-                    }
-                    @if (statusOfRepair == "Closed")
-                    {
-                        <div class="form-group">
-                            <label asp-for="VisitDate" class="control-label"></label>
-                            <input asp-for="VisitDate" readonly="readonly" class="form-control" />
-                            <span asp-validation-for="VisitDate" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="StartDate" class="control-label"></label>
-                            <input asp-for="StartDate" readonly="readonly" class="form-control" />
-                            <span asp-validation-for="StartDate" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="EndDate" class="control-label"></label>
-                            <input asp-for="EndDate" readonly="readonly" class="form-control" />
-                            <span asp-validation-for="EndDate" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="LaborCost" class="control-label"></label>
-                            <input asp-for="LaborCost" readonly="readonly" class="form-control" value="@ViewBag.LaborCost" />
-                            <span asp-validation-for="LaborCost" class="text-danger"></span>
-                        </div>
-                    }
+                        <span asp-validation-for="LaborCost" class="text-danger"></span>
+                    </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle"></i> Save changes</button>
                     </div>
@@ -165,7 +133,79 @@ else
         <a class="btn btn-outline-info" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-chevron-circle-left"></i> Go to Home Page</a>
     </div>
 }
+<script language="javascript">
+    statusRepair();
+    function statusRepair() {
+        var e = document.getElementById("StatusRepair");
+        var statusRepair = e.options[e.selectedIndex].text;
+        if (statusRepair == 'Pending') {
+            document.getElementById('MechanicId').removeAttribute('readonly');
+            document.getElementById('StatusRepair').removeAttribute('readonly');
+            document.getElementById('VisitDate').removeAttribute('readonly');
+            document.getElementById('StartDate').setAttribute('readonly', true);
+            document.getElementById('EndDate').setAttribute('readonly', true);
+            document.getElementById('LaborCost').setAttribute('readonly', true);
+        }
 
+        if (statusRepair == 'Approved') {
+            document.getElementById('MechanicId').removeAttribute('readonly');
+            document.getElementById('StatusRepair').removeAttribute('readonly');
+            document.getElementById('VisitDate').setAttribute('readonly', true);
+            document.getElementById('StartDate').setAttribute('readonly', true);
+            document.getElementById('EndDate').setAttribute('readonly', true);
+            document.getElementById('LaborCost').setAttribute('readonly', true);
+        }
+
+        if (statusRepair == 'Started') {
+            document.getElementById('StatusRepair').removeAttribute('readonly');
+            document.getElementById('MechanicId').setAttribute('readonly', true);
+            document.getElementById('VisitDate').setAttribute('readonly', true);
+            document.getElementById('StartDate').removeAttribute('readonly');
+            document.getElementById('EndDate').setAttribute('readonly', true);
+            document.getElementById('LaborCost').setAttribute('readonly', true);
+        }
+
+        if (statusRepair == 'Fixed') {
+            document.getElementById('StatusRepair').removeAttribute('readonly');
+            document.getElementById('MechanicId').setAttribute('readonly', true);
+            document.getElementById('VisitDate').setAttribute('readonly', true);
+            document.getElementById('StartDate').setAttribute('readonly', true);
+            document.getElementById('EndDate').removeAttribute('readonly');
+            document.getElementById('LaborCost').removeAttribute('readonly');
+        }
+
+        if (statusRepair == 'Closed') {
+            document.getElementById('MechanicId').setAttribute('readonly', true);
+            document.getElementById('StatusRepair').setAttribute('readonly', true);
+            document.getElementById('VisitDate').setAttribute('readonly', true);
+            document.getElementById('StartDate').setAttribute('readonly', true);
+            document.getElementById('EndDate').setAttribute('readonly', true);
+            document.getElementById('LaborCost').setAttribute('readonly', true);
+        }
+
+        document.getElementById("StatusRepairValue").innerHTML(statusRepair);
+    }
+
+    function startDateValidation() {
+        var visitDate = Date.parse(document.getElementById("VisitDate").value);
+        var startDate = Date.parse(document.getElementById("StartDate").value);
+
+        if (startDate < visitDate) {
+            alert('Start Date of Repair must be after Visit Date!');
+            document.getElementById("StartDate").value = "";
+        }
+    }
+
+    function endDateValidation() {
+        var startDate = Date.parse(document.getElementById("StartDate").value);
+        var endDate = Date.parse(document.getElementById("EndDate").value);
+
+        if (endDate < startDate) {
+            alert('End Date of Repair must be after Start Date!');
+            document.getElementById("EndDate").value = "";
+        }
+    }
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

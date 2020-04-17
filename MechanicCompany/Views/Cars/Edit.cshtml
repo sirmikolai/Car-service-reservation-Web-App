@@ -21,45 +21,90 @@
                     <input asp-for="ApplicationUserId" hidden="hidden" value="@ViewBag.UserId" />
                     <div class="form-group">
                         <label asp-for="CarBrand" class="control-label"></label>
-                        <input asp-for="CarBrand" class="form-control" placeholder="Enter Car Brand" />
+                        <div class="input-group">
+                            <input asp-for="CarBrand" class="form-control" placeholder="Enter Car Brand" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-car"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="CarBrand" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="CarModel" class="control-label"></label>
-                        <input asp-for="CarModel" class="form-control" placeholder="Enter Car Model" />
+                        <div class="input-group">
+                            <input asp-for="CarModel" class="form-control" placeholder="Enter Car Model" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-car"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="CarModel" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="ProductionYear" class="control-label"></label>
-                        <input asp-for="ProductionYear" class="form-control" />
+                        <div class="input-group">
+                            <input asp-for="ProductionYear" class="form-control" placeholder="Enter Production Date" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-calendar-day"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="ProductionYear" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="EngineVolume" class="control-label"></label>
-                        <input asp-for="EngineVolume" class="form-control" placeholder="Enter Engine Volume" />
+                        <div class="input-group">
+                            <input asp-for="EngineVolume" class="form-control" placeholder="Enter Engine Volume in cm^3" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="EngineVolume" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="EngineName" class="control-label"></label>
-                        <input asp-for="EngineName" class="form-control" placeholder="Enter Engine Name" />
+                        <div class="input-group">
+                            <input asp-for="EngineName" class="form-control" placeholder="Enter Engine Name" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="EngineName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="EnginePower" class="control-label"></label>
-                        <input asp-for="EnginePower" class="form-control" placeholder="Enter Engine Power" />
+                        <div class="input-group">
+                            <input asp-for="EnginePower" class="form-control" placeholder="Enter Engine Power" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="EnginePower" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="EngineTypeOfFuel" class="control-label"></label>
-                        <select asp-for="EngineTypeOfFuel" class="form-control" asp-items="ViewBag.EngineTypeOfFuel"></select>
+                        <div class="input-group">
+                            <select asp-for="EngineTypeOfFuel" class="form-control" asp-items="ViewBag.EngineTypeOfFuel"></select>
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="CarTypeOfBody" class="control-label"></label>
-                        <select asp-for="CarTypeOfBody" class="form-control" asp-items="ViewBag.CarTypeOfBody"></select>
+                        <div class="input-group">
+                            <select asp-for="CarTypeOfBody" class="form-control" asp-items="ViewBag.CarTypeOfBody"></select>
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label asp-for="RegistrationNumber" class="control-label"></label>
-                        <input asp-for="RegistrationNumber" class="form-control" placeholder="Enter Registration Number" />
+                        <div class="input-group">
+                            <input asp-for="RegistrationNumber" class="form-control" placeholder="Enter Registration Number" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="RegistrationNumber" class="text-danger"></span>
                     </div>
                     <div class="form-group">

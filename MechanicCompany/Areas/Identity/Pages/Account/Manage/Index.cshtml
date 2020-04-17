@@ -16,36 +16,71 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
+                <div class="input-group">
+                    <input asp-for="Username" class="form-control" disabled/>
+                    <div class="input-group-append">
+                        <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-envelope"></i></span>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Input.FirstName"></label>
-                <input asp-for="Input.FirstName" class="form-control" placeholder="Enter First Name" />
+                <div class="input-group">
+                    <input asp-for="Input.FirstName" class="form-control" placeholder="Enter First Name" />
+                    <div class="input-group-append">
+                        <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-user"></i></span>
+                    </div>
+                </div>
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.LastName"></label>
-                <input asp-for="Input.LastName" class="form-control" placeholder="Enter Last Name" />
+                <div class="input-group">
+                    <input asp-for="Input.LastName" class="form-control" placeholder="Enter Last Name" />
+                    <div class="input-group-append">
+                        <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-user"></i></span>
+                    </div>
+                </div>
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.Address"></label>
-                <input asp-for="Input.Address" class="form-control" placeholder="Enter Address" />
+                <div class="input-group">
+                    <input asp-for="Input.Address" class="form-control" placeholder="Enter Address" />
+                    <div class="input-group-append">
+                        <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-address-book"></i></span>
+                    </div>
+                </div>
                 <span asp-validation-for="Input.Address" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.ZipCode"></label>
-                <input asp-for="Input.ZipCode" class="form-control" placeholder="Enter Zip Code" />
+                <div class="input-group">
+                    <input asp-for="Input.ZipCode" class="form-control" placeholder="Enter Zip Code" />
+                    <div class="input-group-append">
+                        <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-address-book"></i></span>
+                    </div>
+                </div>
                 <span asp-validation-for="Input.ZipCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.City"></label>
-                <input asp-for="Input.City" class="form-control" placeholder="Enter City" />
+                <div class="input-group">
+                    <input asp-for="Input.City" class="form-control" placeholder="Enter City" />
+                    <div class="input-group-append">
+                        <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-building"></i></span>
+                    </div>
+                </div>
                 <span asp-validation-for="Input.City" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Enter Phone Number"/>
+                <div class="input-group">
+                    <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Enter Phone Number" />
+                    <div class="input-group-append">
+                        <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-phone-alt"></i></span>
+                    </div>
+                </div>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="btn btn-success"><i class="fa fa-check-circle"></i> Save</button>

@@ -22,7 +22,12 @@
         {
             <div class="form-group">
                 <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" placeholder="Enter Password"/>
+                <div class="input-group">
+                    <input asp-for="Input.Password" class="form-control" placeholder="Enter Password" />
+                    <div class="input-group-append">
+                        <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-key"></i></span>
+                    </div>
+                </div>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
         }

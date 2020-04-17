@@ -18,23 +18,44 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Car" class="control-label"></label>
-                        <select asp-for="CarId" class="form-control" asp-items="ViewBag.CarId"></select>
+                        <div class="input-group">
+                            <select asp-for="CarId" class="form-control" asp-items="ViewBag.CarId"></select>
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-car-alt"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="CarId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Mechanic" class="control-label"></label>
-                        <select asp-for="MechanicId" class="form-control" asp-items="ViewBag.MechanicId"></select>
+                        <div class="input-group">
+                            <select asp-for="MechanicId" class="form-control" asp-items="ViewBag.MechanicId"></select>
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="MechanicId" class="text-danger"></span>
                     </div>
                     <input asp-for="StatusRepair" class="form-control" hidden="hidden" value="@ViewBag.StatusRepair2" />
                     <div class="form-group">
                         <label asp-for="VisitDate" class="control-label"></label>
+                        <div class="input-group">
+                            <input asp-for="VisitDate" class="form-control" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-calendar-day"></i></span>
+                            </div>
+                        </div>
                         <input asp-for="VisitDate" class="form-control" />
                         <span asp-validation-for="VisitDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Description" class="control-label"></label>
-                        <input asp-for="Description" class="form-control" placeholder="Enter Description" />
+                        <div class="input-group">
+                            <input asp-for="Description" class="form-control" placeholder="Enter Description" />
+                            <div class="input-group-append">
+                                <span class="input-group-text text-secondary font-weight-bold"><i class="fa fa-arrow-left"></i></span>
+                            </div>
+                        </div>
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <input type="hidden" asp-for="LaborCost" value="0" />
