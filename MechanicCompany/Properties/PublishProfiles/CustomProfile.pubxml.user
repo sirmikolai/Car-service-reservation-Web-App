@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Ten plik jest wykorzystywany przez proces publikowania/pakowania projektu internetowego. Możesz dostosować zachowanie tego procesu
+ poprzez edycję tego pliku MSBuild. Aby dowiedzieć się więcej o tym działaniu, odwiedź stronę https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAADZQjwVinvEes5SPpuak/eQAAAAACAAAAAAAQZgAAAAEAACAAAAAQEx5zQFUK/4DLzpFGdh45tb0gAXx7b79ZpyHSpMSLIQAAAAAOgAAAAAIAACAAAAB10GMjDkJYCsNF5lMDdWK2UPahT1RPOUISWczx5wmucyAAAAA+dgJU1LKFX8MUWqquhu3nO6m8UsOp9W6KCjDOin0WE0AAAABF7DWry7q7PGMOe8YMM1+PnqQAmbCfudI03SG0g7cFl0WJUq+S8fDQ59AHMsKs5QkAwWHsGjxRNcX35VOzBkes</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=SQL5050.site4now.net%3bInitial Catalog=DB_A5ACF8_MechanicCompanyDB%3bUser Id=DB_A5ACF8_MechanicCompanyDB_admin%3bPassword=oo4raiC3ei%3b</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="MechanicCompany.Data.ApplicationDbContext">
+      <Value>Data Source=SQL5050.site4now.net%3bInitial Catalog=DB_A5ACF8_MechanicCompanyDB%3bUser Id=DB_A5ACF8_MechanicCompanyDB_admin%3bPassword=oo4raiC3ei%3b</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

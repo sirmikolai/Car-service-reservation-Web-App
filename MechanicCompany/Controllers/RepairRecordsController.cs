@@ -313,7 +313,7 @@ namespace MechanicCompany.Controllers
                 ViewData["UserEmail"] = user.Select(r => r.Email).FirstOrDefault();
                 ViewData["CarBrand"] = car.Select(r => r.CarBrand).FirstOrDefault();
                 ViewData["CarModel"] = car.Select(r => r.CarModel).FirstOrDefault();
-                ViewData["ProductionDate"] = car.Select(r => r.ProductionYear).FirstOrDefault().Date.ToShortDateString();
+                ViewData["ProductionDate"] = car.Select(r => r.ProductionDate).FirstOrDefault().Date.ToShortDateString();
                 ViewData["Engine"] = car.Select(r => r.EngineVolume + " " + r.EngineName + " - " + r.EnginePower + "hp - " + r.EngineTypeOfFuel).FirstOrDefault();
                 ViewData["TypeOfBody"] = car.Select(r => r.CarTypeOfBody).FirstOrDefault();
                 ViewData["RegistrationNumber"] = car.Select(r => r.RegistrationNumber).FirstOrDefault();

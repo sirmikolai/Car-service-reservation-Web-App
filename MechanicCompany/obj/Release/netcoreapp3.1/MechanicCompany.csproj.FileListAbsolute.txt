@@ -10,8 +10,6 @@ D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcorea
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\MechanicCompany.pdb
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\MechanicCompany.Views.dll
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\MechanicCompany.Views.pdb
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Identity.UI.Views.V3.dll
@@ -31,21 +29,6 @@ D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcorea
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.FileProviders.Embedded.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Logging.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Logging.Abstractions.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Options.dll
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Extensions.Primitives.dll
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.Identity.Client.dll
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.dll
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
@@ -215,4 +198,5 @@ D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcorea
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcoreapp3.1\Razor\Views\RepairRecords\Invoice.cshtml.g.cs
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcoreapp3.1\MechanicCompany.MvcApplicationPartsAssemblyInfo.cs
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcoreapp3.1\MechanicCompany.MvcApplicationPartsAssemblyInfo.cache
-D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcoreapp3.1\MechanicCompany.csprojAssemblyReference.cache
+D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcoreapp3.1\MechanicCompany.genruntimeconfig.cache
+D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\web.config

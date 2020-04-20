@@ -93,7 +93,7 @@ namespace MechanicCompany.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ApplicationUserId,CarBrand,CarModel,ProductionYear,EngineVolume,EngineName,EnginePower,EngineTypeOfFuel,CarTypeOfBody,RegistrationNumber")] Car car)
+        public async Task<IActionResult> Create([Bind("Id,ApplicationUserId,CarBrand,CarModel,ProductionDate,EngineVolume,EngineName,EnginePower,EngineTypeOfFuel,CarTypeOfBody,RegistrationNumber")] Car car)
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
             ViewBag.CompanyMail = companyMail;
@@ -135,7 +135,7 @@ namespace MechanicCompany.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ApplicationUserId,CarBrand,CarModel,ProductionYear,EngineVolume,EngineName,EnginePower,EngineTypeOfFuel,CarTypeOfBody,RegistrationNumber")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ApplicationUserId,CarBrand,CarModel,ProductionDate,EngineVolume,EngineName,EnginePower,EngineTypeOfFuel,CarTypeOfBody,RegistrationNumber")] Car car)
         {
             var companyMail = _configuration.GetSection("CompanyMail").Value;
             ViewBag.CompanyMail = companyMail;

@@ -15,7 +15,7 @@ namespace MechanicCompany.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.1")
+                .HasAnnotation("ProductVersion", "3.1.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -56,7 +56,7 @@ namespace MechanicCompany.Migrations
                     b.Property<int>("EngineVolume")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ProductionYear")
+                    b.Property<DateTime>("ProductionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RegistrationNumber")

@@ -40,11 +40,11 @@ namespace MechanicCompany.Controllers
         {
             var CompanyMail = _configuration.GetSection("CompanyMail").Value;
             ViewBag.CompanyMail = CompanyMail;
-            var ClientAdress = HttpContext.Request.Form["YourAddress"].FirstOrDefault();
+            var ClientMail = HttpContext.Request.Form["Mail"].FirstOrDefault();
             var Subject = HttpContext.Request.Form["Subject"].FirstOrDefault();
             var Body = "<div style='width: 70%; float: center'><center>" +
                 "<img src='https://i.imgur.com/JgvLADt.png' alt='Mechanic Company' height='99' width='300'/><hr>" +
-                "<p></p><p></p><p>" + ClientAdress + " send email to you: </p>" +
+                "<p></p><p></p><p>" + ClientMail + " send email to you: </p>" +
                 "<p></p><p></p><p>" + HttpContext.Request.Form["Body"].FirstOrDefault() + "</p><hr>" +
                 "<div><strong>Mechanic Company</strong><br>Armii Krajowej 36, 42-202 Częstochowa<br>" +
                 "(48) 869 268 456<br>smtpserverforapp@gmail.com</div></center></div>";

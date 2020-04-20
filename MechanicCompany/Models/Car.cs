@@ -19,8 +19,8 @@ namespace MechanicCompany.Models
         [Required]
         public string CarModel { get; set; }
         [DataType(DataType.Date)]
-        [Display(Name = "Production Year")]
-        public DateTime ProductionYear { get; set; }
+        [Display(Name = "Production Date")]
+        public DateTime ProductionDate { get; set; }
         [Display(Name = "Engine Volume")]
         [Required]
         public int EngineVolume { get; set; }

@@ -34,7 +34,7 @@
                     Car Details
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.ProductionYear)
+                    @Html.DisplayNameFor(model => model.ProductionDate)
                 </th>
                 <th></th>
             </tr>
@@ -50,7 +50,7 @@
                     @Html.DisplayFor(modelItem => item.FullNameOfCar)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ProductionYear)
+                    @Html.DisplayFor(modelItem => item.ProductionDate)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" style="margin: 4px;" class="btn btn-outline-success"><i class="fa fa-edit" title="Edit"></i> </a>

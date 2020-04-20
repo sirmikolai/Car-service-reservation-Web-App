@@ -1,4 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
   <IisApp path="D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcoreapp3.1\PubTmp\Out\" />
+  <dbfullsql path="D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcoreapp3.1\PubTmp\EFSQLScripts\MechanicCompany.Data.ApplicationDbContext.sql" />
 </sitemanifest>
