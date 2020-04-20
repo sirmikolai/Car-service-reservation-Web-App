@@ -200,3 +200,4 @@ D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcorea
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcoreapp3.1\MechanicCompany.MvcApplicationPartsAssemblyInfo.cache
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcoreapp3.1\MechanicCompany.genruntimeconfig.cache
 D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\bin\Release\netcoreapp3.1\web.config
+D:\Praca\MechanicCompany\MechanicCompanyApp\MechanicCompany\obj\Release\netcoreapp3.1\MechanicCompany.csprojAssemblyReference.cache
